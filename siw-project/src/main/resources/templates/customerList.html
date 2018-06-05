@@ -1,0 +1,21 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <div>
+    	<h4>Customers</h4>
+		<div>
+			<table>
+				<tr>
+					<th>Name</th>
+				</tr>
+				<tr th:each="customer : ${customers}">
+					<td><a th:href="@{'/customer' + '/' + ${customer.id}}"><span th:text="${customer.name}"></span></a></td>					
+                </tr>
+            </table>
+   		</div>
+    </div>
+</body>
+</html>
