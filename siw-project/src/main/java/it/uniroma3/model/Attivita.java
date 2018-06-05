@@ -1,5 +1,8 @@
 package it.uniroma3.model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +18,12 @@ public class Attivita {
 	
 	@Column(nullable=false)
 	private String name;
+	
+	@Column(nullable=false)
+	private LocalDate date;
+	
+	@Column(nullable=false)
+	private LocalTime time;			
 	
 
 	public Attivita() {}
@@ -38,6 +47,23 @@ public class Attivita {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
 	
 }
 

@@ -19,6 +19,18 @@ public class Allievo {
 	@Column(nullable=false)
 	private String surname;
 	
+	@Column(nullable=false)
+	private String email;
+	
+	@Column(nullable=false)
+	private String phone;
+	
+	@Column(nullable=false)
+	private String birtdate;
+	
+	@Column(nullable=false)
+	private String birthplace;
+	
 
 	public Allievo() {}
 
@@ -50,6 +62,38 @@ public class Allievo {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getBirtdate() {
+		return birtdate;
+	}
+
+	public void setBirtdate(String birtdate) {
+		this.birtdate = birtdate;
+	}
+
+	public String getBirthplace() {
+		return birthplace;
+	}
+
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
 	}
 	
 	
