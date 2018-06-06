@@ -1,5 +1,7 @@
 package it.uniroma3.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,8 @@ public class Azienda {
 	@Column(nullable=false)
 	private String name;
 	
+	@ManyToMany(fetch=FetchType.LAZY)
+	private List<Allievo> iscritti;
 
 	public Azienda() {}
 
@@ -32,6 +36,15 @@ public class Azienda {
 		this.name = name;
 	}
 	
+	public void addAllievo(Allievo a) {
+		this.iscritti.add(a);
+	}
 	
+	public Allievo getAllievoByCodice(Long codice) {
+		for(Allievo a : iscritti)
+			if(a.getId()==codice)
+				return a;
+		return null;
+	}
 }
 

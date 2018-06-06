@@ -15,6 +15,9 @@ public class Responsabile {
 	@Column(nullable=false)
 	private String surname;
 	
+	@ManyToOne
+    @JoinColumn(name = "centro_id")
+	private Centro centroDiAppartenenza;
 
 	public Responsabile() {}
 

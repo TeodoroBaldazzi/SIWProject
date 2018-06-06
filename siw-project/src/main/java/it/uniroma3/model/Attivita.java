@@ -1,10 +1,9 @@
 package it.uniroma3.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.*;
 
 @Entity
 public class Attivita {
@@ -16,7 +15,12 @@ public class Attivita {
 	@Column(nullable=false)
 	private String name;
 	
-
+	@Column(nullable=false)
+	private Date dataOra;
+	
+	@ManyToMany
+	private List<Allievo> allieviIscritti;
+	
 	public Attivita() {}
 
 	public Attivita(String name, String surname, String city) {
@@ -37,6 +41,14 @@ public class Attivita {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void addAllievo(Allievo a) {
+		this.allieviIscritti.add(a);
+	}
+	
+	public void removeAllievo(Allievo a) {
+		this.allieviIscritti.remove(a);
 	}
 	
 }

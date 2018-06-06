@@ -1,10 +1,9 @@
 package it.uniroma3.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.*;
 
 @Entity
 public class Allievo {
@@ -19,7 +18,19 @@ public class Allievo {
 	@Column(nullable=false)
 	private String surname;
 	
-
+	@Column(nullable=false)
+	private String email;
+	
+	private String telefono;
+	
+	private String luogoNascita;
+	
+	@Temporal(TemporalType.DATE)
+	private Date dataNascita;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	private List<Attivita> attivita; 
+	
 	public Allievo() {}
 
 	public Allievo(String name, String surname, String city) {
@@ -52,5 +63,51 @@ public class Allievo {
 		this.surname = surname;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getLuogoNascita() {
+		return luogoNascita;
+	}
+
+	public void setLuogoNascita(String luogoNascita) {
+		this.luogoNascita = luogoNascita;
+	}
+
+	public Date getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public Attivita getAttivitabyName(String nomeAttivita) {
+		for(Attivita a : attivita)
+			if(a.getName().equals(nomeAttivita))
+				return a;
+		return null;
+	}
+	
+	public void addAttivita(Attivita a) {
+		this.attivita.add(a);
+	}
+	
+	public void removeAttivita(Attivita a) {
+		this.attivita.remove(a);
+	}
 	
 }
