@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Insert Student</h4>
+		<p th:text="${exists}"></p>
+	</div>
+	<form th:action="@{/student}" method="POST" th:object="${student}">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" th:field="*{name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+			</tr>		
+			<tr>
+				<td>Surname:</td>
+				<td><input type="text" th:field="*{surname}" /></td>
+				<td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" th:field="*{email}" /></td>
+				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td><input type="text" th:field="*{phone}" /></td>
+				<td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></td>
+			</tr>
+			<tr>
+				<td>Birthdate:</td>
+				<td><input type="text" th:field="*{birthdate}" /></td>
+				<td th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></td>
+			</tr>
+			<tr>
+				<td>Birthplace:</td>
+				<td><input type="text" th:field="*{birthplace}" /></td>
+				<td th:if="${#fields.hasErrors('birthplace')}" th:errors="*{birthplace}"></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

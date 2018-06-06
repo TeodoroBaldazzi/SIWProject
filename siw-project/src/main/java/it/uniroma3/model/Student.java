@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Allievo {
+public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,21 +22,22 @@ public class Allievo {
 	@Column(nullable=false)
 	private String email;
 	
-	@Column(nullable=false)
+	@Column
 	private String phone;
 	
-	@Column(nullable=false)
-	private String birtdate;
+	@Column
+	private String birtdate;				//LocalDate
 	
-	@Column(nullable=false)
+	@Column
 	private String birthplace;
 	
 
-	public Allievo() {}
+	public Student() {}
 
-	public Allievo(String name, String surname, String city) {
+	public Student(String name, String surname, String email) {
 		this.name = name;
 		this.surname = surname;
+		this.email = email;
 	}
 
 	public String getName() {
