@@ -21,21 +21,22 @@ public class Student {
 	@Column(nullable=false)
 	private String email;
 	
-	private String telefono;
+	private String phone;
 	
-	private String luogoNascita;
+	private String birthplace;
 	
 	@Temporal(TemporalType.DATE)
-	private Date dataNascita;
+	private Date birthdate;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
-	private List<Attivita> attivita; 
+	private List<Attivita> activities; 
 	
 	public Student() {}
 
-	public Student(String name, String surname, String city) {
+	public Student(String name, String surname, String email) {
 		this.name = name;
 		this.surname = surname;
+		this.email = email;
 	}
 
 	public String getName() {
@@ -71,43 +72,43 @@ public class Student {
 		this.email = email;
 	}
 
-	public String getTelefono() {
-		return telefono;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setPhone(String telefono) {
+		this.phone = telefono;
 	}
 
-	public String getLuogoNascita() {
-		return luogoNascita;
+	public String getBirthplace() {
+		return birthplace;
 	}
 
-	public void setLuogoNascita(String luogoNascita) {
-		this.luogoNascita = luogoNascita;
+	public void setBirthplace(String luogoNascita) {
+		this.birthplace = luogoNascita;
 	}
 
-	public Date getDataNascita() {
-		return dataNascita;
+	public Date getBirthdate() {
+		return birthdate;
 	}
 
-	public void setDataNascita(Date dataNascita) {
-		this.dataNascita = dataNascita;
+	public void setBirthdate(Date dataNascita) {
+		this.birthdate = dataNascita;
 	}
 
-	public Attivita getAttivitabyName(String nomeAttivita) {
-		for(Attivita a : attivita)
+	public Attivita getActivityByName(String nomeAttivita) {
+		for(Attivita a : activities)
 			if(a.getName().equals(nomeAttivita))
 				return a;
 		return null;
 	}
 	
-	public void addAttivita(Attivita a) {
-		this.attivita.add(a);
+	public void addActivity(Attivita a) {
+		this.activities.add(a);
 	}
 	
-	public void removeAttivita(Attivita a) {
-		this.attivita.remove(a);
+	public void removeActivity(Attivita a) {
+		this.activities.remove(a);
 	}
 	
 }
