@@ -50,6 +50,13 @@ public class Attivita {
 	public void removeAllievo(Allievo a) {
 		this.allieviIscritti.remove(a);
 	}
+	public Date getDataOra() {
+		return dataOra;
+	}
+
+	public void setDate(Date date) {
+		this.dataOra = date;
+	}
 	
 }
 

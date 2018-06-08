@@ -10,18 +10,22 @@ public class Centro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable=false)
 	private String name;
 
 	@Column(nullable=false)
-	private String email;
-	
-	private String telefono;
-	
+	private String address;
+
 	@Column(nullable=false)
-	private int capienza;
-	
+	private String email;
+
+	@Column(nullable=false)
+	private String phone;
+
+	@Column(nullable=false)
+	private Integer maxCapacity;
+
 	@OneToMany
 	@JoinColumn(name="centro_id")
 	private List<Attivita> attivitaSvolte;
@@ -29,19 +33,20 @@ public class Centro {
 	@OneToMany(mappedBy="centroDiAppartenenza")
 	private List<Responsabile> responsabili;
 
-	
+
 	public Centro() {}
 
 	public Centro(String name, String surname, String city) {
 		this.name = name;
 	}
 
-	public String getName() {
-		return this.name;
-	}
 
 	public Long getId() {
 		return id;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -56,37 +61,44 @@ public class Centro {
 		this.email = email;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public int getCapienza() {
-		return capienza;
-	}
-
-	public void setCapienza(int capienza) {
-		this.capienza = capienza;
-	}
-	
 	public Attivita getAttivitabyName(String nomeAttivita) {
 		for(Attivita a : attivitaSvolte)
 			if(a.getName().equals(nomeAttivita))
 				return a;
 		return null;
 	}
-	
+
 	public void addAttivita(Attivita a) {
 		this.attivitaSvolte.add(a);
 	}
-	
+
 	public void removeAttivita(Attivita a) {
 		this.attivitaSvolte.remove(a);
 	}
-	
-	
+
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Integer getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(Integer maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 }
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Student</title>
+</head>
+<body>
+    <div>
+    	<h4>Student</h4>
+		<div>
+			<span th:text="${student.name}"></span>
+   		</div>
+		<div>
+			<span th:text="${student.surname}"></span>
+   		</div>
+		<div>
+			<span th:text="${student.email}"></span>
+   		</div>
+   		<div>
+			<span th:text="${student.phone}"></span>
+   		</div>
+		<div>
+			<span th:text="${student.birthdate}"></span>
+   		</div>
+		<div>
+			<span th:text="${student.birthplace}"></span>
+   		</div>
+    </div>
+</body>
+</html>
