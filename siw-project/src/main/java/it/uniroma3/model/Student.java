@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Allievo {
+public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,9 +31,9 @@ public class Allievo {
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Attivita> attivita; 
 	
-	public Allievo() {}
+	public Student() {}
 
-	public Allievo(String name, String surname, String city) {
+	public Student(String name, String surname, String city) {
 		this.name = name;
 		this.surname = surname;
 	}

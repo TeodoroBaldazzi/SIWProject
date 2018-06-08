@@ -19,7 +19,7 @@ public class Attivita {
 	private Date dataOra;
 	
 	@ManyToMany
-	private List<Allievo> allieviIscritti;
+	private List<Student> allieviIscritti;
 	
 	public Attivita() {}
 
@@ -43,11 +43,11 @@ public class Attivita {
 		this.name = name;
 	}
 	
-	public void addAllievo(Allievo a) {
+	public void addAllievo(Student a) {
 		this.allieviIscritti.add(a);
 	}
 	
-	public void removeAllievo(Allievo a) {
+	public void removeAllievo(Student a) {
 		this.allieviIscritti.remove(a);
 	}
 	public Date getDataOra() {

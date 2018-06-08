@@ -15,7 +15,7 @@ public class Azienda {
 	private String name;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Allievo> iscritti;
+	private List<Student> iscritti;
 
 	public Azienda() {}
 
@@ -36,12 +36,12 @@ public class Azienda {
 		this.name = name;
 	}
 	
-	public void addAllievo(Allievo a) {
+	public void addAllievo(Student a) {
 		this.iscritti.add(a);
 	}
 	
-	public Allievo getAllievoByCodice(Long codice) {
-		for(Allievo a : iscritti)
+	public Student getAllievoByCodice(Long codice) {
+		for(Student a : iscritti)
 			if(a.getId()==codice)
 				return a;
 		return null;
