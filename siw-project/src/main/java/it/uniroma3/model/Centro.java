@@ -28,7 +28,7 @@ public class Centro {
 
 	@OneToMany
 	@JoinColumn(name="centro_id")
-	private List<Attivita> attivitaSvolte;
+	private List<Activity> attivitaSvolte;
 
 	@OneToMany(mappedBy="centroDiAppartenenza")
 	private List<Responsabile> responsabili;
@@ -61,18 +61,18 @@ public class Centro {
 		this.email = email;
 	}
 
-	public Attivita getAttivitabyName(String nomeAttivita) {
-		for(Attivita a : attivitaSvolte)
+	public Activity getAttivitabyName(String nomeAttivita) {
+		for(Activity a : attivitaSvolte)
 			if(a.getName().equals(nomeAttivita))
 				return a;
 		return null;
 	}
 
-	public void addAttivita(Attivita a) {
+	public void addAttivita(Activity a) {
 		this.attivitaSvolte.add(a);
 	}
 
-	public void removeAttivita(Attivita a) {
+	public void removeAttivita(Activity a) {
 		this.attivitaSvolte.remove(a);
 	}
 

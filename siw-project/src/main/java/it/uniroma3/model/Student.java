@@ -29,7 +29,7 @@ public class Student {
 	private Date birthdate;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
-	private List<Attivita> activities; 
+	private List<Activity> activities; 
 	
 	public Student() {}
 
@@ -96,18 +96,18 @@ public class Student {
 		this.birthdate = dataNascita;
 	}
 
-	public Attivita getActivityByName(String nomeAttivita) {
-		for(Attivita a : activities)
+	public Activity getActivityByName(String nomeAttivita) {
+		for(Activity a : activities)
 			if(a.getName().equals(nomeAttivita))
 				return a;
 		return null;
 	}
 	
-	public void addActivity(Attivita a) {
+	public void addActivity(Activity a) {
 		this.activities.add(a);
 	}
 	
-	public void removeActivity(Attivita a) {
+	public void removeActivity(Activity a) {
 		this.activities.remove(a);
 	}
 	
