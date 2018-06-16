@@ -3,6 +3,7 @@ package it.uniroma3.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,18 +16,18 @@ import it.uniroma3.model.Activity;
 import it.uniroma3.service.ActivityService;
 
 
-
+@Controller
 public class ActivityController {
 
 	@Autowired
-	private ActivityService studentService;
+	private ActivityService activityService;
 
 	@Autowired
 	private ActivityValidator validator;
 
 	@RequestMapping("/activities")
 	public String attivita(Model model) {
-		model.addAttribute("activities", this.studentService.findAll());
+		model.addAttribute("activities", this.activityService.findAll());
 		return "activitiesList";
 	}
 
@@ -38,17 +39,17 @@ public class ActivityController {
 
 	@RequestMapping(value = "/activity/{id}", method = RequestMethod.GET)
 	public String getAttivita(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("activity", this.studentService.findById(id));
+		model.addAttribute("activity", this.activityService.findById(id));
 		return "showActivity";
 	}
 
 	@RequestMapping(value = "/activity", method = RequestMethod.POST)
-	public String newCustomer(@Valid @ModelAttribute("activity") Activity attivita, Model model, BindingResult bindingResult) {		
+	public String newAttivita(@Valid @ModelAttribute("activity") Activity attivita, Model model, BindingResult bindingResult) {		
 		this.validator.validate(attivita, bindingResult);
 
 		if (!bindingResult.hasErrors()) {
-			this.studentService.save(attivita);
-			model.addAttribute("activities", this.studentService.findAll());
+			this.activityService.save(attivita);
+			model.addAttribute("activities", this.activityService.findAll());
 			return "activityList";
 		}
 

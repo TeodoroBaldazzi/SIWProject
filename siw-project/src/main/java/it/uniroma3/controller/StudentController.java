@@ -3,19 +3,25 @@ package it.uniroma3.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.controller.validator.StudentValidator;
+import it.uniroma3.converter.DateConverter;
 import it.uniroma3.model.Student;
 import it.uniroma3.service.StudentService;
 
-@RestController
+
+@Controller
 public class StudentController {
 	
 	@Autowired
@@ -23,6 +29,18 @@ public class StudentController {
 
     @Autowired
     private StudentValidator validator;
+    
+    /*
+    @Autowired
+    private ConversionService conversionService;
+    
+    
+    @InitBinder("student")
+    public void initBinder(@RequestParam("date")String date, WebDataBinder binder){
+        
+    	
+    }
+    */
 
     @RequestMapping("/students")
     public String allievi(Model model) {

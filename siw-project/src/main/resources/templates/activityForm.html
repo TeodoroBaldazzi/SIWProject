@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Insert Activity</h4>
+		<p th:text="${exists}"></p>
+	</div>
+	<form th:action="@{/activity}" method="POST" th:object="${activity}">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" th:field="*{name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+			</tr>		
+			<tr>
+				<td>DateTime:</td>
+				<td><input type="text" th:field="*{dataOra}" /></td>
+				<td th:if="${#fields.hasErrors('dataOra')}" th:errors="*{dataOra}"></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

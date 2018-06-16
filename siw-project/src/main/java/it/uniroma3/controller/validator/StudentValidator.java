@@ -16,7 +16,7 @@ public class StudentValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "surname", "required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthdate", "required");
+        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthdate", "required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthplace", "required");
 
     }

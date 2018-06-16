@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td><input type="text" th:field="*{email}" /></td>
+				<td><input type="email" th:field="*{email}" /></td>
 				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
 			</tr>
 			<tr>
@@ -31,11 +31,11 @@
 				<td><input type="text" th:field="*{phone}" /></td>
 				<td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></td>
 			</tr>
-			<tr>
+			<!--<tr>
 				<td>Birthdate:</td>
-				<td><input type="text" th:field="*{birthdate}" /></td>
+				<td><input type="date" th:field="*{birthdate}" /></td>
 				<td th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></td>
-			</tr>
+			</tr>-->
 			<tr>
 				<td>Birthplace:</td>
 				<td><input type="text" th:field="*{birthplace}" /></td>
