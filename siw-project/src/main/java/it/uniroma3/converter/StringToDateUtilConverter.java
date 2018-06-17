@@ -11,20 +11,23 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.databind.util.Converter;
 
 
-@Component
-public class DateConverter implements Converter<String, Date> {
-
+//@Component
+public class StringToDateUtilConverter {
+/*
 	@Override
 	public Date convert(String value) {
+		return null;
+
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date d = null;
 		try{
 			d = df.parse(value);
 		}
 		catch(Exception e) {
-			
+			return null;
 		}
 		return d;
+
 	}
 
 	@Override
@@ -39,5 +42,5 @@ public class DateConverter implements Converter<String, Date> {
 		return null;
 	}
 
-
+*/
 }

@@ -1,8 +1,6 @@
 package it.uniroma3;
 
 
-import java.util.Date;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +29,5 @@ public class SiwProjectApplication {
 	public void init() {
 		Student student = new Student("Teodoro", "Baldazzi", "teodoro.baldazzi@gmail.com");
 		studentService.save(student);
-		@SuppressWarnings("deprecation")
-		Activity activity = new Activity("Prova", new Date(2019,1,1,13,0));
-		activityService.save(activity);
 	}
 }

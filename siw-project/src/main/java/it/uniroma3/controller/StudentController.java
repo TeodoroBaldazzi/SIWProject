@@ -1,8 +1,12 @@
 package it.uniroma3.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import it.uniroma3.controller.validator.StudentValidator;
-import it.uniroma3.converter.DateConverter;
+import it.uniroma3.converter.StringToDateUtilConverter;
 import it.uniroma3.model.Student;
 import it.uniroma3.service.StudentService;
 
@@ -32,17 +36,33 @@ public class StudentController {
     @Autowired
     private StudentValidator validator;
     
+    
+    
     /*
     @Autowired
     private ConversionService conversionService;
+     	 	
     
-    
+    /*
     @InitBinder("student")
     public void initBinder(@RequestParam("date")String date, WebDataBinder binder){
-        
-    	
+        binder.setConversionService(conversionService);
+        //        conversionService.convert(date, Date.class);
+
     }
     */
+    
+    @InitBinder("student")
+    public void initBinder(WebDataBinder binder) {
+        //try {
+    	CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy"), true);
+        binder.registerCustomEditor(Date.class, editor);
+        //}
+        //catch(Exception e) {
+        //	 throw new IllegalArgumentException("Wrong Format");
+        //}
+    }
+    
 
     @RequestMapping("/students")
     public String allievi(Model model) {

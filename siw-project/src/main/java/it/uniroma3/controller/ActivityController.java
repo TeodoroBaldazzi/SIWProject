@@ -1,11 +1,17 @@
 package it.uniroma3.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +30,17 @@ public class ActivityController {
 
 	@Autowired
 	private ActivityValidator validator;
+	
+	@InitBinder("activity")
+    public void initBinder(WebDataBinder binder) {
+        //try {
+    	CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy HH:mm"), true);
+        binder.registerCustomEditor(Date.class, editor);
+        //}
+        //catch(Exception e) {
+        //	 throw new IllegalArgumentException("Wrong Format");
+        //}
+    }
 
 	@RequestMapping("/activities")
 	public String attivita(Model model) {

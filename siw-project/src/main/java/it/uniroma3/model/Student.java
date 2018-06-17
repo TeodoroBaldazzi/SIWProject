@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Student {
 
@@ -25,10 +27,11 @@ public class Student {
 	
 	private String birthplace;
 	
-	/*
+	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style="dd/MM/yyyy")
 	private Date birthdate;
-	*/
+	
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateTimeRegistration;
@@ -90,7 +93,7 @@ public class Student {
 		this.birthplace = luogoNascita;
 	}
 
-	/*
+	
 	public Date getBirthdate() {
 		return birthdate;
 	}
@@ -98,7 +101,7 @@ public class Student {
 	public void setBirthdate(Date dataNascita) {
 		this.birthdate = dataNascita;
 	}
-	*/
+	
 	
 	public Date getDateTimeRegistration() {
 		return dateTimeRegistration;

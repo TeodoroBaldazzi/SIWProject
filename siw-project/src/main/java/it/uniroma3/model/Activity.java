@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Activity {
 
@@ -15,10 +17,12 @@ public class Activity {
 	
 	@Column(nullable=false)
 	private String name;
-	/*
+	
 	@Column(nullable=false)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style="dd/MM/yyyy HH:mm")
 	private Date dataOra;
-	*/
+	
 	@ManyToMany
 	private Map<Long,Student> allieviIscritti;
 	
@@ -38,7 +42,7 @@ public class Activity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/*
+	
 	public Date getDataOra() {
 		return dataOra;
 	}
@@ -46,7 +50,7 @@ public class Activity {
 	public void setDataOra(Date dataOra) {
 		this.dataOra = dataOra;
 	}
-	 */
+	
 	public Map<Long, Student> getAllieviIscritti() {
 		return allieviIscritti;
 	}
