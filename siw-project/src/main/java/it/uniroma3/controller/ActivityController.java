@@ -50,7 +50,7 @@ public class ActivityController {
 		if (!bindingResult.hasErrors()) {
 			this.activityService.save(attivita);
 			model.addAttribute("activities", this.activityService.findAll());
-			return "activityList";
+			return "activitiesList";
 		}
 
 		return "activityForm";

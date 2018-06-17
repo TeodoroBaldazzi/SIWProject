@@ -15,10 +15,10 @@ public class Activity {
 	
 	@Column(nullable=false)
 	private String name;
-	
+	/*
 	@Column(nullable=false)
 	private Date dataOra;
-	
+	*/
 	@ManyToMany
 	private Map<Long,Student> allieviIscritti;
 	
@@ -26,7 +26,7 @@ public class Activity {
 
 	public Activity(String name, Date dataOra) {
 		this.name = name;
-		this.dataOra = dataOra;
+		//this.dataOra = dataOra;
 		this.allieviIscritti = new HashMap<>();
 	}
 
@@ -38,7 +38,7 @@ public class Activity {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	/*
 	public Date getDataOra() {
 		return dataOra;
 	}
@@ -46,7 +46,7 @@ public class Activity {
 	public void setDataOra(Date dataOra) {
 		this.dataOra = dataOra;
 	}
-
+	 */
 	public Map<Long, Student> getAllieviIscritti() {
 		return allieviIscritti;
 	}

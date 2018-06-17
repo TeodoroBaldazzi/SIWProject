@@ -16,11 +16,13 @@
 				<td><input type="text" th:field="*{name}" /></td>
 				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
 			</tr>		
+			<!--
 			<tr>
 				<td>DateTime:</td>
 				<td><input type="text" th:field="*{dataOra}" /></td>
 				<td th:if="${#fields.hasErrors('dataOra')}" th:errors="*{dataOra}"></td>
 			</tr>
+			-->
 			<tr>
 				<td><button type="submit">Submit</button></td>
 			</tr>

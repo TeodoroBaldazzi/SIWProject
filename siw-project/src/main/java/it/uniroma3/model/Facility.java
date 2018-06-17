@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Centro {
+public class Facility {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,9 +34,9 @@ public class Centro {
 	private List<Responsabile> responsabili;
 
 
-	public Centro() {}
+	public Facility() {}
 
-	public Centro(String name, String surname, String city) {
+	public Facility(String name, String surname, String city) {
 		this.name = name;
 	}
 

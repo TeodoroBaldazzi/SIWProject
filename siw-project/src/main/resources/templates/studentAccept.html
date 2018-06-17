@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="ISO-8859-1">
+<title>Conferma</title>
+</head>
+<body>
+	<h2>Conferma dati student</h2>
+	<div>
+			<span th:text="${student.name}"></span>
+   		</div>
+		<div>
+			<span th:text="${student.surname}"></span>
+   		</div>
+		<div>
+			<span th:text="${student.email}"></span>
+   		</div>
+   		<div>
+			<span th:text="${student.phone}"></span>
+   		</div>
+		<!--<div>
+			<span th:text="${student.birthdate}"></span>
+   		</div>-->
+		<div>
+			<span th:text="${student.birthplace}"></span>
+   		</div>
+	<a th:href="@{/confirmStudent}">Conferma</a>
+</body>
+</html>

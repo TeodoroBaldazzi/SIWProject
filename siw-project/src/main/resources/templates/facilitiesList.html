@@ -2,23 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <head>
-<title>Activities</title>
+<title>Facilities</title>
 </head>
 <body>
 	<div>
-		<h4>Activities</h4>
+		<h4>Facilities</h4>
 		<div>
 			<table>
 				<tr>
 					<th>Name</th>
 				</tr>
-				<tr th:each="activity : ${activities}">
-					<td><a th:href="@{'activity' + '/' + ${activity.id}}"><span
-							th:text="${activity.name}"></span></a></td>
+				<tr th:each="facility : ${facilities}">
+					<td><a th:href="@{'facility' + '/' + ${facility.id}}"><span
+							th:text="${facility.name}"></span></a></td>
 				</tr>
 			</table>
 		</div>
 	</div>
-	<a th:href="@{/addActivity}">Insert new activity</a>
+	<a th:href="@{/addFacility}">Insert new facility</a>
 </body>
 </html>

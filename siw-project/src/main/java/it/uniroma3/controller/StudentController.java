@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import it.uniroma3.controller.validator.StudentValidator;
 import it.uniroma3.converter.DateConverter;
@@ -22,6 +23,7 @@ import it.uniroma3.service.StudentService;
 
 
 @Controller
+@SessionAttributes({"student","students"})
 public class StudentController {
 	
 	@Autowired
@@ -61,7 +63,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/student", method = RequestMethod.POST)
-    public String newCustomer(@Valid @ModelAttribute("student") Student allievo, Model model, BindingResult bindingResult) {
+    public String newAllievo(@Valid @ModelAttribute("student") Student allievo, Model model, BindingResult bindingResult) {
         this.validator.validate(allievo, bindingResult);
         if (this.studentService.alreadyExists(allievo)) {
             model.addAttribute("exists", "Student already exists");
@@ -69,15 +71,22 @@ public class StudentController {
         }
         else {
             if (!bindingResult.hasErrors()) {
-                this.studentService.save(allievo);
-                model.addAttribute("students", this.studentService.findAll());
-                return "studentsList";
+            	return "studentAccept";
             }
         }
         return "studentForm";
     }
 
+    
+    @RequestMapping(value="/confirmStudent", method = RequestMethod.GET)
+    public String confirmAllievo(@ModelAttribute("student") Student allievo, Model model) {
+    	
+    	this.studentService.save(allievo);
+        model.addAttribute("students", this.studentService.findAll());
+        return "studentsList";
 
+    }
+    
 }
 
     
