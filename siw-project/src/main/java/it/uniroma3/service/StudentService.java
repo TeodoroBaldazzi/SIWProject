@@ -32,6 +32,11 @@ public class StudentService {
 		else
 			return null;
 	}
+	
+	public List<Student> findByNameAndSurnameAndEmail(String name, String surname, String email){
+		List<Student> customers = this.allievoRepository.findByNameAndSurnameAndEmail(name, surname, email);
+		return customers;
+	}
 
 	public boolean alreadyExists(Student allievo) {
 		List<Student> customers = this.allievoRepository.findByNameAndSurnameAndEmail(allievo.getName(), allievo.getSurname(), allievo.getEmail());

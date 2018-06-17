@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.model.Facility;
+import it.uniroma3.model.Student;
 import it.uniroma3.repository.FacilityRepository;
 
 @Transactional
@@ -31,6 +32,11 @@ public class FacilityService {
 			return facility.get();
 		else
 			return null;
+	}
+	
+	public List<Facility> findByNameAndAddressAndEmail(String name, String address, String email){
+		List<Facility> facilities = this.facilityRepository.findByNameAndAddressAndEmail(name, address, email);
+		return facilities;
 	}
 	
 	public boolean alreadyExists(Facility centro) {

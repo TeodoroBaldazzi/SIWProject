@@ -48,6 +48,8 @@ public class FacilityController {
 
 		if (this.facilityService.alreadyExists(facility)) {
 			model.addAttribute("exists", "Facility already exists");
+			model.addAttribute("esistente", this.facilityService.findByNameAndAddressAndEmail(facility.getName(),
+					facility.getAddress(), facility.getEmail()));			
 			return "facilityForm";
 		}
 		else

@@ -8,6 +8,23 @@
 	<div>
 		<h4 class="title">Insert Activity</h4>
 		<p th:text="${exists}"></p>
+		<div th:if="${exists!=null && exists.equals('Facility already exists')}">
+		<div>
+			<span th:text="${facility.name}"></span>
+		</div>
+		<div>
+			<span th:text="${facility.address}"></span>
+		</div>
+		<div>
+			<span th:text="${facility.email}"></span>
+		</div>
+		<div>
+			<span th:text="${facility.phone}"></span>
+		</div>
+		<div>
+			<span th:text="${facility.maxCapacity}"></span>
+		</div>
+	</div>
 	</div>
 	<form th:action="@{/facility}" method="POST" th:object="${facility}">
 		<table>

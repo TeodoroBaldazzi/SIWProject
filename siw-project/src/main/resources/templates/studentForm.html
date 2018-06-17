@@ -8,6 +8,27 @@
 	<div>
 		<h4 class="title">Insert Student</h4>
 		<p th:text="${exists}"></p>
+		<div th:if="${exists!=null && exists.equals('Student already exists')}">
+			<div>
+				<span th:text="${student.name}"></span>
+			</div>
+			<div>
+				<span th:text="${student.surname}"></span>
+			</div>
+			<div>
+				<span th:text="${student.email}"></span>
+			</div>
+			<div>
+				<span th:text="${student.phone}"></span>
+			</div>
+			<!--<div>
+			<span th:text="${student.birthdate}"></span>
+   		</div>-->
+			<div>
+				<span th:text="${student.birthplace}"></span>
+			</div>
+		</div>
+
 	</div>
 	<form th:action="@{/student}" method="POST" th:object="${student}">
 		<table>
@@ -15,7 +36,7 @@
 				<td>Name:</td>
 				<td><input type="text" th:field="*{name}" /></td>
 				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
-			</tr>		
+			</tr>
 			<tr>
 				<td>Surname:</td>
 				<td><input type="text" th:field="*{surname}" /></td>
@@ -39,7 +60,8 @@
 			<tr>
 				<td>Birthplace:</td>
 				<td><input type="text" th:field="*{birthplace}" /></td>
-				<td th:if="${#fields.hasErrors('birthplace')}" th:errors="*{birthplace}"></td>
+				<td th:if="${#fields.hasErrors('birthplace')}"
+					th:errors="*{birthplace}"></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Submit</button></td>

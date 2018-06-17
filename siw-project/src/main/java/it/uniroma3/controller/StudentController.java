@@ -67,6 +67,8 @@ public class StudentController {
         this.validator.validate(allievo, bindingResult);
         if (this.studentService.alreadyExists(allievo)) {
             model.addAttribute("exists", "Student already exists");
+            model.addAttribute("esistente", this.studentService.findByNameAndSurnameAndEmail(allievo.getName(),
+            					allievo.getSurname(), allievo.getEmail()));
             return "studentForm";
         }
         else {
