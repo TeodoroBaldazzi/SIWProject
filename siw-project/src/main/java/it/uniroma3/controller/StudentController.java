@@ -3,6 +3,7 @@ package it.uniroma3.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +16,7 @@ import it.uniroma3.controller.validator.StudentValidator;
 import it.uniroma3.model.Student;
 import it.uniroma3.service.StudentService;
 
-@RestController
+@Controller
 public class StudentController {
 	
 	@Autowired
@@ -23,6 +24,11 @@ public class StudentController {
 
     @Autowired
     private StudentValidator validator;
+
+    @RequestMapping("/home")
+    public String home(){
+        return "index";
+    }
 
     @RequestMapping("/students")
     public String allievi(Model model) {
