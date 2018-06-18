@@ -44,6 +44,15 @@ public class StudentService {
 			return true;
 		else 
 			return false;
-	}	
+	}
+
+	public Student findByEmail(String email) {
+		Optional<Student> allievo = this.allievoRepository.findByEmail(email);
+		if (allievo.isPresent()) 
+			return allievo.get();
+		else
+			return null;
+	}
+		
 }
 

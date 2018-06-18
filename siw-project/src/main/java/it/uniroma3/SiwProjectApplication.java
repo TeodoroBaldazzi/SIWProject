@@ -15,19 +15,17 @@ import it.uniroma3.service.StudentService;
 @SpringBootApplication
 public class SiwProjectApplication {
 
-	@Autowired
-	private StudentService studentService; 
-	
-	@Autowired
-	private ActivityService activityService; 
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SiwProjectApplication.class, args);
 	}
 	
+	/*
 	@PostConstruct
 	public void init() {
 		Student student = new Student("Teodoro", "Baldazzi", "teodoro.baldazzi@gmail.com");
 		studentService.save(student);
 	}
+	*/
+	
 }

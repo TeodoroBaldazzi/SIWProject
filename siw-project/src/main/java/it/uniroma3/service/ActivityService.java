@@ -35,6 +35,12 @@ public class ActivityService {
 			return null;
 	}
 
+	
+	public List<Activity> findByFacility() {
+		return (List<Activity>) this.activityRepository.findByFacility()
+	}
+	
+
 	/*
 	public boolean alreadyExists(Activity attivita) {
 		List<Activity> activities = this.activityRepository.findByName(attivita.getName());

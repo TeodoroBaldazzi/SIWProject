@@ -1,30 +1,31 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <head>
-<meta charset="ISO-8859-1">
 <title>Conferma</title>
 </head>
 <body>
-	<h2>Conferma dati student</h2>
 	<div>
+		<h2>Conferma dati student</h2>
+		<div>
 			<span th:text="${student.name}"></span>
-   		</div>
+		</div>
 		<div>
 			<span th:text="${student.surname}"></span>
-   		</div>
+		</div>
 		<div>
 			<span th:text="${student.email}"></span>
-   		</div>
-   		<div>
+		</div>
+		<div>
 			<span th:text="${student.phone}"></span>
-   		</div>
+		</div>
 		<div>
 			<span th:text="${student.birthdate}"></span>
-   		</div>
+		</div>
 		<div>
 			<span th:text="${student.birthplace}"></span>
-   		</div>
+		</div>
+	</div>
 	<a th:href="@{/confirmStudent}">Conferma</a>
 </body>
 </html>

@@ -23,26 +23,33 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import it.uniroma3.controller.validator.StudentValidator;
 import it.uniroma3.converter.StringToDateUtilConverter;
 import it.uniroma3.model.Student;
+import it.uniroma3.service.ActivityService;
 import it.uniroma3.service.StudentService;
 
 
 @Controller
 @SessionAttributes({"student","students"})
 public class StudentController {
-	
-	@Autowired
-    private StudentService studentService;
 
-    @Autowired
-    private StudentValidator validator;
-    
-    
-    
-    /*
+	@Autowired
+	private StudentService studentService;
+
+	@Autowired
+	private StudentValidator validator;
+
+
+
+	@Autowired
+	private ActivityService activityService;
+	
+	
+	
+	
+	/*
     @Autowired
     private ConversionService conversionService;
-     	 	
-    
+
+
     /*
     @InitBinder("student")
     public void initBinder(@RequestParam("date")String date, WebDataBinder binder){
@@ -50,66 +57,91 @@ public class StudentController {
         //        conversionService.convert(date, Date.class);
 
     }
-    */
-    
-    @InitBinder("student")
-    public void initBinder(WebDataBinder binder) {
-        //try {
-    	CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy"), true);
-        binder.registerCustomEditor(Date.class, editor);
-        //}
-        //catch(Exception e) {
-        //	 throw new IllegalArgumentException("Wrong Format");
-        //}
-    }
-    
+	 */
 
-    @RequestMapping("/students")
-    public String allievi(Model model) {
-        model.addAttribute("students", this.studentService.findAll());
-        return "studentsList";
-    }
+	@InitBinder("student")
+	public void initBinderStudent(WebDataBinder binder) {
+		//try {
+		CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy"), true);
+		binder.registerCustomEditor(Date.class, editor);
+		//}
+		//catch(Exception e) {
+		//	 throw new IllegalArgumentException("Wrong Format");
+		//}
+	}
 
-    @RequestMapping("/addStudent")
-    public String addAllievo(Model model) {
-        model.addAttribute("student", new Student());
-        return "studentForm";
-    }
 
-    @RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
-    public String getAllievo(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("student", this.studentService.findById(id));
-    	return "showStudent";
-    }
+	@RequestMapping("/students")
+	public String allievi(Model model) {
+		model.addAttribute("students", this.studentService.findAll());
+		return "studentsList";
+	}
 
-    @RequestMapping(value = "/student", method = RequestMethod.POST)
-    public String newAllievo(@Valid @ModelAttribute("student") Student allievo, Model model, BindingResult bindingResult) {
-        this.validator.validate(allievo, bindingResult);
-        if (this.studentService.alreadyExists(allievo)) {
-            model.addAttribute("exists", "Student already exists");
-            model.addAttribute("esistente", this.studentService.findByNameAndSurnameAndEmail(allievo.getName(),
-            					allievo.getSurname(), allievo.getEmail()));
-            return "studentForm";
-        }
-        else {
-            if (!bindingResult.hasErrors()) {
-            	return "studentAccept";
-            }
-        }
-        return "studentForm";
-    }
+	@RequestMapping("/addStudent")
+	public String addAllievo(Model model) {
+		model.addAttribute("student", new Student());
+		return "studentForm";
+	}
 
-    
-    @RequestMapping(value="/confirmStudent", method = RequestMethod.GET)
-    public String confirmAllievo(@ModelAttribute("student") Student allievo, Model model) {
-    	
-    	this.studentService.save(allievo);
-        model.addAttribute("students", this.studentService.findAll());
-        return "studentsList";
+	@RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
+	public String getAllievo(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("student", this.studentService.findById(id));
+		return "showStudent";
+	}
 
-    }
-    
+	@RequestMapping(value = "/student", method = RequestMethod.POST)
+	public String newAllievo(@Valid @ModelAttribute("student") Student allievo, Model model, BindingResult bindingResult) {
+		this.validator.validate(allievo, bindingResult);
+		if (this.studentService.alreadyExists(allievo)) {
+			model.addAttribute("exists", "Student already exists");
+			model.addAttribute("esistente", this.studentService.findByNameAndSurnameAndEmail(allievo.getName(),
+					allievo.getSurname(), allievo.getEmail()));
+			return "studentForm";
+		}
+		else {
+			if (!bindingResult.hasErrors()) {
+				return "studentAccept";
+			}
+		}
+		return "studentForm";
+	}
+
+
+	@RequestMapping(value="/confirmStudent", method = RequestMethod.GET)
+	public String confirmAllievo(@ModelAttribute("student") Student allievo, Model model) {
+		allievo.setDateTimeRegistration(new Date());
+		this.studentService.save(allievo);
+		model.addAttribute("students", this.studentService.findAll());
+		return "studentsList";
+
+	}
+
+	
+	
+	
+	@RequestMapping("/chooseStudent")
+	public String chooseStudent(Model model) {
+		//model.addAttribute("student", new Student());
+		return "selectStudent";
+	}
+	
+
+	@RequestMapping(value="/handleParticipations", method = RequestMethod.GET)
+	public String handleParticipations(@RequestParam("email") String email, Model model) {
+		if(email!=null && !email.equals("")) {
+			Student current = this.studentService.findByEmail(email.toLowerCase());
+			if(current==null) {
+				model.addAttribute("exists", "Student does not exist");
+				return "selectStudent";
+			}
+			model.addAttribute("student", current);
+			return "showStudent";
+		}
+		model.addAttribute("errorParam", "Insert email");
+		return "showStudent";
+	}
+
 }
 
-    
+
 

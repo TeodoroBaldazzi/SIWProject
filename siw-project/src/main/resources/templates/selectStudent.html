@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="ISO-8859-1">
+<title>Fornisci id studente</title>
+</head>
+<body>
+	<div>
+		<h4 class="title">Fornisci id Studente</h4>
+		<p th:text="${exists}"></p>
+	</div>
+	<form th:action="@{/handleParticipations}" method="GET">
+		<table>
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" name="email" />
+				<span tx:text="${errorParam}"></span></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Cerca Allievo</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

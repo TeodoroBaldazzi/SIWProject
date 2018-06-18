@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import it.uniroma3.controller.validator.ActivityValidator;
 import it.uniroma3.model.Activity;
@@ -23,6 +24,7 @@ import it.uniroma3.service.ActivityService;
 
 
 @Controller
+@SessionAttributes({"activity"})
 public class ActivityController {
 
 	@Autowired
@@ -44,7 +46,7 @@ public class ActivityController {
 
 	@RequestMapping("/activities")
 	public String attivita(Model model) {
-		model.addAttribute("activities", this.activityService.findAll());
+		model.addAttribute("activities", this.activityService.findByFacility());
 		return "activitiesList";
 	}
 
@@ -72,7 +74,13 @@ public class ActivityController {
 
 		return "activityForm";
 	}
-
+	
+	@RequestMapping("/chooseActivity")
+	public String chooseActivity(Model model) {
+		return "activityChosen";
+	}
+	
+	
 }
 
 

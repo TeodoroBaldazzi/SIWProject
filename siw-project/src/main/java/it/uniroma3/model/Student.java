@@ -34,6 +34,7 @@ public class Student {
 	
 	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style="dd/MM/yyyy HH:mm:ss")
 	private Date dateTimeRegistration;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
@@ -59,6 +60,9 @@ public class Student {
 
 	public Long getId() {
 		return id;
+	}
+	public void setId(Long value) {
+		this.id = value;
 	}
 
 	public void setName(String name) {
