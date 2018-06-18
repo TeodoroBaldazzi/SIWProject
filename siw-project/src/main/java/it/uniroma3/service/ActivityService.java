@@ -35,11 +35,11 @@ public class ActivityService {
 			return null;
 	}
 
-	
+	/*
 	public List<Activity> findByFacility() {
-		return (List<Activity>) this.activityRepository.findByFacility()
+		return (List<Activity>) this.activityRepository.findByFacility();
 	}
-	
+	*/
 
 	/*
 	public boolean alreadyExists(Activity attivita) {

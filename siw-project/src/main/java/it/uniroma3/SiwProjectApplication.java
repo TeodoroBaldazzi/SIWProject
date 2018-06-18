@@ -24,13 +24,14 @@ public class SiwProjectApplication {
 		SpringApplication.run(SiwProjectApplication.class, args);
 	}
 
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		Student student = new Student("Teodoro", "Baldazzi", "teodoro.baldazzi@gmail.com");
 		studentService.save(student);
 		Activity activity = new Activity("Prova", parseDate("10-06-2018"), 10);
 		activityService.save(activity);
 	}
+*/
 
 	public static Date parseDate(String date) {
 		try {

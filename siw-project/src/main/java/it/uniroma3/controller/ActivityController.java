@@ -47,7 +47,8 @@ public class ActivityController {
 
 	@RequestMapping("/activities")
 	public String attivita(Model model) {
-		model.addAttribute("activities", this.activityService.findByFacility());
+		//model.addAttribute("activities", this.activityService.findByFacility());
+		model.addAttribute("activites", this.activityService.findAll());
 		return "activitiesList";
 	}
 
