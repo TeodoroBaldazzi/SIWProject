@@ -17,7 +17,7 @@ public class Responsabile {
 	
 	@ManyToOne
     @JoinColumn(name = "centro_id")
-	private Centro centroDiAppartenenza;
+	private Facility centroDiAppartenenza;
 
 	public Responsabile() {}
 

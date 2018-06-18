@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Facility</title>
+</head>
+<body>
+	<div>
+		<h4>Facility</h4>
+		<div>
+			<span th:text="${facility.name}"></span>
+   		</div>
+   		<div>
+			<span th:text="${facility.address}"></span>
+   		</div>
+   		<div>
+			<span th:text="${facility.email}"></span>
+   		</div>
+   		<div>
+			<span th:text="${facility.phone}"></span>
+   		</div>
+   		<div>
+			<span th:text="${facility.maxCapacity}"></span>
+   		</div>
+	</div>
+	<a th:href="@{/confirmFacility}">Conferma</a>
+</body>
+</html>

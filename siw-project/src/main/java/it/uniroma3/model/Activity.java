@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Activity {
 
@@ -17,6 +19,8 @@ public class Activity {
 	private String name;
 	
 	@Column(nullable=false)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style="dd/MM/yyyy HH:mm")
 	private Date dataOra;
 
 	@Column(nullable = false)

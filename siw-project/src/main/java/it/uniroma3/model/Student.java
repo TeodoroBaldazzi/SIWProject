@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Student {
 
@@ -25,8 +27,15 @@ public class Student {
 	
 	private String birthplace;
 	
+	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style="dd/MM/yyyy")
 	private Date birthdate;
+	
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style="dd/MM/yyyy HH:mm:ss")
+	private Date dateTimeRegistration;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Activity> activities; 
@@ -47,13 +56,13 @@ public class Student {
 		return this.surname;
 	}
 
+	
 
 	public Long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long value) {
+		this.id = value;
 	}
 
 	public void setName(String name) {
@@ -88,12 +97,22 @@ public class Student {
 		this.birthplace = luogoNascita;
 	}
 
+	
 	public Date getBirthdate() {
 		return birthdate;
 	}
 
 	public void setBirthdate(Date dataNascita) {
 		this.birthdate = dataNascita;
+	}
+	
+	
+	public Date getDateTimeRegistration() {
+		return dateTimeRegistration;
+	}
+
+	public void setDateTimeRegistration(Date dateTimeRegistration) {
+		this.dateTimeRegistration = dateTimeRegistration;
 	}
 
 	public Activity getActivityByName(String nomeAttivita) {
@@ -111,4 +130,6 @@ public class Student {
 		this.activities.remove(a);
 	}
 	
+	
+
 }
