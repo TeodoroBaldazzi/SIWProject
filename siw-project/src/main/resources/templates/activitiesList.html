@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HomePage</title>
+    <title>Activity List</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/datepicker3.css" rel="stylesheet">
@@ -99,7 +99,7 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a th:href="@{#}"><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
+        <li><a th:href="@{/home}"><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
         <li><a th:href="@{/dashboard}"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
         <li class="parent "><a href="#sub-item-2">
             <em class="fa fa-list">&nbsp;</em> Activities
@@ -108,11 +108,10 @@
                 <li><a th:href="@{/addActivity}">
                     <span class="fa fa-arrow-right">&nbsp;</span> Insert new Activity
                 </a></li>
-                <li><a th:href="@{/activities}">
+                <li><a th:href="@{/#}" style="background-color:#30a5ff;color:white">
                     <span class="fa fa-arrow-right">&nbsp;</span> Activity List
                 </a></li>
             </ul>
-        </li>
         <li class="parent "><a href="#sub-item-1">
             <em class="fa fa-users">&nbsp;</em> Students
         </a>
@@ -132,47 +131,40 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Home Page</h1>
+            <h1 class="page-header">Activities</h1>
         </div>
     </div><!--/.row-->
 
-    <a th:href="@{/addStudent}">
-        <div class="panel panel-container">
-            <div class="row">
-                <div class="no-padding">
-                    <div class="panel panel-teal panel-widget border-right">
-                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-id-card color-blue"></em></div>
-                        <div class="text-muted" style="color:#0f0f0f;margin-left:2em;display:inline-block;vertical-align:middle">Register New Student</div>
-                    </div>
-                </div>
+    <div>
+        <table class="table table-hover table-responsive">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Data e Ora</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="activity : ${activities}">
+                <td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myActivity"
+                       th:href="@{'/' + 'activity' + '/' + ${activity.id}}" th:text="${activity.getName()}"></a></td>
+                <td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myActivity"
+                       th:href="@{'/' + 'activity' + '/' + ${activity.id}}" th:text="${activity.getDataOra().toLocaleString()}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Modal fake DON'T DELETE-->
+        <div id="myActivity" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content"></div>
             </div>
         </div>
-    </a>
-    <a>
-        <div class="panel panel-container">
-            <div class="row">
-                <div class="no-padding">
-                    <div class="panel panel-teal panel-widget border-right">
-                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-clipboard color-blue"></em></div>
-                        <div class="text-muted" style="color:#0f0f0f;margin-left:2em;display:inline-block;vertical-align:middle">Enroll Student To Activity</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-    <a th:href="@{addActivity}">
-        <div class="panel panel-container">
-            <div class="row">
-                <div class="no-padding">
-                    <div class="panel panel-teal panel-widget border-right">
-                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-leanpub color-blue"></em></div>
-                        <!-- <div class="large">120</div>-->
-                        <div class="text-muted" style="color:#0f0f0f;margin-left:2em;display:inline-block;vertical-align:middle">Insert New Activity</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
+
+    </div>
+
+
+
     <footer style="position:fixed; bottom:0; right:50px;">
         <p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
     </footer><!--/.row-->

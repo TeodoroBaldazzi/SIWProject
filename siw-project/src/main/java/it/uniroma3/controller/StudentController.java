@@ -30,6 +30,12 @@ public class StudentController {
         return "index";
     }
 
+
+    @RequestMapping("/dashboard")
+    public String dashboard(Model model) {
+        return "dashboard";
+    }
+
     @RequestMapping("/students")
     public String allievi(Model model) {
         model.addAttribute("students", this.studentService.findAll());

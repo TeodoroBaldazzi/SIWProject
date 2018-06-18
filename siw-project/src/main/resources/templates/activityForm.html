@@ -105,25 +105,25 @@
 			<em class="fa fa-list">&nbsp;</em> Activities
 		</a>
 			<ul class="children" id="sub-item-2">
-				<li><a th:href="@{/addActivity}">
+				<li><a th:href="@{/#}" style="background-color:#30a5ff;color:white">
 					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Activity
 				</a></li>
 				<li><a th:href="@{/activities}">
 					<span class="fa fa-arrow-right">&nbsp;</span> Activity List
 				</a></li>
 			</ul>
-		</li><li class="parent "><a href="#sub-item-1">
-		<em class="fa fa-users">&nbsp;</em> Students
-	</a>
-		<ul class="children" id="sub-item-1">
-			<li><a style="background-color: #30a5ff; color: white" th:href="@{/#}">
-				<span class="fa fa-arrow-right">&nbsp;</span> Insert new Student
-			</a></li>
-			<li><a th:href="@{/students}">
-				<span class="fa fa-arrow-right">&nbsp;</span> Students List
-			</a></li>
-		</ul>
-	</li>
+		<li class="parent "><a href="#sub-item-1">
+			<em class="fa fa-users">&nbsp;</em> Students
+		</a>
+			<ul class="children" id="sub-item-1">
+				<li><a th:href="@{/addStudent}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Student
+				</a></li>
+				<li><a th:href="@{/students}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Students List
+				</a></li>
+			</ul>
+		</li>
 		<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 	</ul>
 </div><!--/.sidebar-->
@@ -151,43 +151,19 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="col-md-6">
-						<form role="form" th:action="@{/student}" method="POST" th:object="${student}">
+						<form role="form" th:action="@{/activity}" method="POST" th:object="${activity}">
 							<div class="form-group">
 								<label>Name: &emsp;</label>
 								<input class="form-control" type="text" th:field="*{name}" />
 							</div>
 							<div class="form-group">
-								<label>Surname: &emsp;</label>
-								<input class="form-control" type="text" th:field="*{surname}" />
+								<label>Maximum number of Participants: &emsp;</label>
+								<input class="form-control" type="number" th:field="*{limitePartecipanti}" />
 							</div>
 							<div class="form-group">
-								<label>Email: &emsp;</label>
-								<input class="form-control" th:type="email" th:field="*{email}" />
+								<label>Date & Time: &emsp;</label>
+								<input class="form-control" type="datetime-local" th:field="*{dataOra}" />
 							</div>
-							<div class="form-group">
-								<label>Phone: &emsp;</label>
-								<input class="form-control" type="number" th:field="*{phone}" />
-							</div>
-							<div class="form-group">
-								<label>Birthdate: &emsp;</label>
-								<input type="month" class="form-control" th:field="*{birthdate}" />
-							</div>
-							<div class="form-group">
-								<label>Birthplace: &emsp;</label>
-								<input class="form-control" type="text" th:field="*{birthplace}" />
-							</div>
-							<!--<p class="help-block">Example block-level help text here.</p>
-
-							<label>Validation</label>
-							<div class="form-group has-success">
-								<input class="form-control" placeholder="Success">
-							</div>
-							<div class="form-group has-warning">
-								<input class="form-control" placeholder="Warning">
-							</div>
-							<div class="form-group has-error">
-								<input class="form-control" placeholder="Error">
-							</div>-->
 							<button type="submit" class="btn btn-primary">Submit </button>
 							<button type="reset" class="btn btn-default">Reset</button>
 						</form>
@@ -196,45 +172,6 @@
 			</div>
 		</div><!-- /.panel-->
 	</div><!-- /.col-->
-
-
-	<!--<form th:action="@{/student}" method="POST" th:object="${student}">
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><input type="text" th:field="*{name}" /></td>
-				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
-			</tr>
-			<tr>
-				<td>Surname:</td>
-				<td><input type="text" th:field="*{surname}" /></td>
-				<td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><input type="text" th:field="*{email}" /></td>
-				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
-			</tr>
-			<tr>
-				<td>Phone:</td>
-				<td><input type="text" th:field="*{phone}" /></td>
-				<td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></td>
-			</tr>
-			<tr>
-				<td>Birthdate:</td>
-				<td><input type="text" th:field="*{birthdate}" /></td>
-				<td th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></td>
-			</tr>
-			<tr>
-				<td>Birthplace:</td>
-				<td><input type="text" th:field="*{birthplace}" /></td>
-				<td th:if="${#fields.hasErrors('birthplace')}" th:errors="*{birthplace}"></td>
-			</tr>
-			<tr>
-				<td><button type="submit">Submit</button></td>
-			</tr>
-		</table>
-	</form>-->
 
 	<footer style="position:fixed; bottom:0; right:50px;">
 		<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>

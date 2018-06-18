@@ -18,15 +18,19 @@ public class Activity {
 	
 	@Column(nullable=false)
 	private Date dataOra;
-	
+
+	@Column(nullable = false)
+	private int limitePartecipanti;
+
 	@ManyToMany
 	private Map<Long,Student> allieviIscritti;
 	
 	public Activity() {}
 
-	public Activity(String name, Date dataOra) {
+	public Activity(String name, Date dataOra, int limitePartecipanti) {
 		this.name = name;
 		this.dataOra = dataOra;
+		this.limitePartecipanti = limitePartecipanti;
 		this.allieviIscritti = new HashMap<>();
 	}
 
@@ -37,6 +41,14 @@ public class Activity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getLimitePartecipanti() {
+		return this.limitePartecipanti;
+	}
+
+	public void setLimitePartecipanti(int limite) {
+		this.limitePartecipanti = limite;
 	}
 
 	public Date getDataOra() {

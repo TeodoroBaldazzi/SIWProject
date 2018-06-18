@@ -99,21 +99,28 @@
 		</div>
 	</form>
 	<ul class="nav menu">
-		<li class="active"><a><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
-		<li><a href="dashboard.html"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
-		<li><a th:href="@{/students}"><em class="fa fa-users">&nbsp;</em> Students List</a></li>
-		<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-			<em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+		<li><a th:href="@{/home}"><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
+		<li><a th:href="@{/dashboard}"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
+		<li class="parent "><a href="#sub-item-2">
+			<em class="fa fa-list">&nbsp;</em> Activities
 		</a>
-			<ul class="children collapse" id="sub-item-1">
-				<li><a class="" href="#">
-					<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 1
+			<ul class="children" id="sub-item-2">
+				<li><a th:href="@{/addActivity}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Activity
 				</a></li>
-				<li><a class="" href="#">
-					<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 2
+				<li><a th:href="@{/activities}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Activity List
 				</a></li>
-				<li><a class="" href="#">
-					<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 3
+			</ul>
+		</li><li class="parent "><a href="#sub-item-1">
+			<em class="fa fa-users">&nbsp;</em> Students
+		</a>
+			<ul class="children" id="sub-item-1">
+				<li><a th:href="@{/addStudent}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Student
+				</a></li>
+				<li><a style="background-color: #30a5ff; color: white" th:href="@{#}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Students List
 				</a></li>
 			</ul>
 		</li>
@@ -132,19 +139,28 @@
 		<table class="table table-hover table-responsive">
 			<thead>
 			<tr>
-				<th><div class="th-inner sortable">Name</div></th>
+				<th>Name</th>
 				<th>Surame</th>
 				<th>Email</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr th:each="student : ${students}">
-				<td><a style="display:block;color:black;text-decoration: none" th:href="@{'student' + '/' + ${student.id}}" th:text="${student.name}"></a></td>
-				<td><a style="display:block;color:black;text-decoration: none" th:href="@{'student' + '/' + ${student.id}}" th:text="${student.surname}"></a></td>
-				<td><a style="display:block;color:black;text-decoration: none" th:href="@{'student' + '/' + ${student.id}}" th:text="${student.email}"></a></td>
+				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myModal" th:href="@{'student' + '/' + ${student.id}}" th:text="${student.name}"></a></td>
+				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myModal" th:href="@{'student' + '/' + ${student.id}}" th:text="${student.surname}"></a></td>
+				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myModal" th:href="@{'student' + '/' + ${student.id}}" th:text="${student.email}"></a></td>
 			</tr>
 			</tbody>
 		</table>
+
+		<!-- Modal fake DON'T DELETE-->
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
 	</div>
 
 

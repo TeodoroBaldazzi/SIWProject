@@ -1,6 +1,8 @@
 package it.uniroma3;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -18,21 +20,28 @@ import it.uniroma3.service.StudentService;
 public class SiwProjectApplication {
 
 	@Autowired
-	private StudentService studentService; 
-	
+	private StudentService studentService;
+
 	@Autowired
-	private ActivityService activityService; 
-	
+	private ActivityService activityService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SiwProjectApplication.class, args);
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		Student student = new Student("Teodoro", "Baldazzi", "teodoro.baldazzi@gmail.com");
 		studentService.save(student);
-		@SuppressWarnings("deprecation")
-		Activity activity = new Activity("Prova", new Date(2019,1,1,13,0));
+		Activity activity = new Activity("Prova", parseDate("10-06-2018"), 10);
 		activityService.save(activity);
+	}
+
+	public static Date parseDate(String date) {
+		try {
+			return new SimpleDateFormat("dd-MM-yyyy").parse(date);
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 }
