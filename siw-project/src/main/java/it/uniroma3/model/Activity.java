@@ -26,8 +26,15 @@ public class Activity {
 	@Column(nullable = false)
 	private int limitePartecipanti;
 
+	/*
 	@ManyToMany
 	private Map<Long,Student> allieviIscritti;
+	*/
+	
+	
+	@OneToMany
+	private Map<Long,Partecipazione> partecipazioni;
+	
 	
 	public Activity() {}
 
@@ -35,7 +42,8 @@ public class Activity {
 		this.name = name;
 		this.dataOra = dataOra;
 		this.limitePartecipanti = limitePartecipanti;
-		this.allieviIscritti = new HashMap<>();
+		//this.allieviIscritti = new HashMap<>();
+		
 	}
 
 		
@@ -63,20 +71,31 @@ public class Activity {
 		this.dataOra = dataOra;
 	}
 
+	/*
 	public Map<Long, Student> getAllieviIscritti() {
 		return allieviIscritti;
 	}
-
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/*
 	public void addAllievo(Student a) {
 		this.allieviIscritti.put(a.getId(),a);
 	}
 	
 	public void removeAllievo(Student a) {
 		this.allieviIscritti.remove(a.getId());
+	}
+	*/
+	
+	public void addPartecipazione(Partecipazione a) {
+		this.partecipazioni.put(a.getId(),a);
+	}
+	
+	public void removePartecipazione(Partecipazione a) {
+		this.partecipazioni.remove(a.getId());
 	}
 
 }
