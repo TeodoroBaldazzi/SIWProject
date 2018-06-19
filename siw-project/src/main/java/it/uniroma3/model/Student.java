@@ -1,7 +1,9 @@
 package it.uniroma3.model;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.*;
 
@@ -37,8 +39,15 @@ public class Student {
 	@DateTimeFormat(style="dd/MM/yyyy HH:mm:ss")
 	private Date dateTimeRegistration;
 	
+	/*
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Activity> activities; 
+	*/
+	
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	private Map<Long,Partecipazione> partecipazioni;
+	
 	
 	public Student() {}
 
@@ -46,6 +55,7 @@ public class Student {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
+		partecipazioni = new HashMap<>();
 	}
 
 	public String getName() {
@@ -115,6 +125,7 @@ public class Student {
 		this.dateTimeRegistration = dateTimeRegistration;
 	}
 
+	/*
 	public Activity getActivityByName(String nomeAttivita) {
 		for(Activity a : activities)
 			if(a.getName().equals(nomeAttivita))
@@ -129,7 +140,15 @@ public class Student {
 	public void removeActivity(Activity a) {
 		this.activities.remove(a);
 	}
+	*/
 	
+	public void addPartecipazione(Partecipazione a) {
+		this.partecipazioni.put(a.getId(),a);
+	}
+	
+	public void removePartecipazione(Partecipazione a) {
+		this.partecipazioni.remove(a.getId());
+	}
 	
 
 }

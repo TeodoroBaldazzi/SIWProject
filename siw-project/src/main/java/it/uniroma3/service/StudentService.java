@@ -40,7 +40,7 @@ public class StudentService {
 
 	public boolean alreadyExists(Student allievo) {
 		List<Student> customers = this.allievoRepository.findByNameAndSurnameAndEmail(allievo.getName(), allievo.getSurname(), allievo.getEmail());
-		if (customers.size() > 0)
+		if (!customers.isEmpty())
 			return true;
 		else 
 			return false;

@@ -124,7 +124,7 @@ public class StudentController {
 				return "selectStudent";
 			}
 			model.addAttribute("student", current);
-			return "showStudent";
+			return "activitiesList";
 		}
 		model.addAttribute("errorParam", "Insert email");
 		return "showStudent";
