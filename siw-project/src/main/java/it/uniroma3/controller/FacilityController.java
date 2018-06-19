@@ -1,5 +1,10 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import it.uniroma3.controller.validator.FacilityValidator;
+import it.uniroma3.model.Activity;
 import it.uniroma3.model.Facility;
 import it.uniroma3.model.FacilityManager;
 import it.uniroma3.service.FacilityService;
@@ -75,6 +82,38 @@ public class FacilityController {
 		model.addAttribute("facilities", this.facilityService.findAll());
 		return "facilitiesList";
 
+	}
+	
+	@RequestMapping(value = "/facility/{id}/activities", method = RequestMethod.GET)
+	public String getAttivita(@PathVariable("id") Long id, Model model) {
+		Facility facility = (Facility) this.facilityService.findById(id);
+		model.addAttribute("facility",facility);
+		//model.addAttribute("activities", facility.getAttivitaSvolte());
+		return "chooseTemporalFilter";
+	}
+	
+	@RequestMapping("/filterActivities")
+	public String filterActivities(@RequestParam("inferior")String inferior, @RequestParam("inferior")String superior,
+			Model model, HttpSession session) {
+		Facility facility = (Facility) session.getAttribute("facility");
+		Date inf = new Date(inferior);
+		Date sup = new Date(superior);
+		
+		//NON SO SE CONVENGA COSI' OPPURE CON UNA QUERY PARTICOLARE
+		Map<Long,Activity> tmp = facility.getAttivitaSvolte();
+		Map<Long,Activity> activities = new HashMap<>();
+		
+		//METODI AFTER E BEFORE DI DATE UTILI
+		for (Long id : tmp.keySet()) {
+			Activity a = tmp.get(id);
+			if(a.getDataOra().after(inf) && a.getDataOra().before(sup))
+				activities.put(id, a);
+		}
+
+		
+		model.addAttribute("activities", activities);
+		return "showActivities";
+		
 	}
 
 }

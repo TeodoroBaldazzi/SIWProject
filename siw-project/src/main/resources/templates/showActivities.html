@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Show Activity</title>
+</head>
+<body>
+<body>
+	<div>
+		<h4>Activities</h4>
+		<div>
+			<table>
+				<tr th:each="activity : ${activities}">
+					<td><span th:text="${activity.value.getAllievo().getName() + ' ' + participation.value.getAllievo().getSurname()}"></span></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

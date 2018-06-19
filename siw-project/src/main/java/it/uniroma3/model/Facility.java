@@ -1,6 +1,7 @@
 package it.uniroma3.model;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.*;
 
@@ -28,7 +29,7 @@ public class Facility {
 
 	@OneToMany(mappedBy="facility",cascade=CascadeType.ALL)
 	//@JoinColumn(name="centro_id")
-	private List<Activity> attivitaSvolte;
+	private Map<Long,Activity> attivitaSvolte;
 
 	/*
 	@OneToMany(mappedBy="centroDiAppartenenza")
@@ -64,19 +65,21 @@ public class Facility {
 		this.email = email;
 	}
 
+	/*
 	public Activity getAttivitabyName(String nomeAttivita) {
 		for(Activity a : attivitaSvolte)
 			if(a.getName().equals(nomeAttivita))
 				return a;
 		return null;
 	}
+	*/
 
 	public void addAttivita(Activity a) {
-		this.attivitaSvolte.add(a);
+		this.attivitaSvolte.put(a.getId(),a);
 	}
 
 	public void removeAttivita(Activity a) {
-		this.attivitaSvolte.remove(a);
+		this.attivitaSvolte.remove(a.getId());
 	}
 
 
@@ -111,6 +114,16 @@ public class Facility {
 	public void setResponsabile(FacilityManager responsabile) {
 		this.responsabile = responsabile;
 	}
+
+	public Map<Long,Activity> getAttivitaSvolte() {
+		return attivitaSvolte;
+	}
+
+	public void setAttivitaSvolte(Map<Long,Activity> attivitaSvolte) {
+		this.attivitaSvolte = attivitaSvolte;
+	}
+	
+	
 	
 	
 }

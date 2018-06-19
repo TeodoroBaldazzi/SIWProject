@@ -16,6 +16,11 @@
 					<td><a th:href="@{'facility' + '/' + ${facility.id}}"><span
 							th:text="${facility.name}"></span></a></td>
 				</tr>
+				<tr>
+					<td><a
+						th:href="@{'facility' + '/' + ${facility.id} + '/activities'}">
+							SIMBOLO ATTIVITA</a></td>
+				</tr>
 			</table>
 		</div>
 	</div>
