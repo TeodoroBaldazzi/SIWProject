@@ -26,8 +26,8 @@ public class Facility {
 	@Column(nullable=false)
 	private Integer maxCapacity;
 
-	@OneToMany
-	@JoinColumn(name="centro_id")
+	@OneToMany(mappedBy="facility",cascade=CascadeType.ALL)
+	//@JoinColumn(name="centro_id")
 	private List<Activity> attivitaSvolte;
 
 	/*

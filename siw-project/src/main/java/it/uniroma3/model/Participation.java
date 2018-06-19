@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Partecipazione {
+public class Participation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,11 +19,11 @@ public class Partecipazione {
 	@ManyToOne
 	private Activity attivita;
 	
-	public Partecipazione() {
+	public Participation() {
 	
 	}
 	
-	public Partecipazione(Student allievo, Activity attivita) {
+	public Participation(Student allievo, Activity attivita) {
 		this.allievo = allievo;
 		this.attivita = attivita;
 	}

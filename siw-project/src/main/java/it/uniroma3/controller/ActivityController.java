@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import it.uniroma3.controller.validator.ActivityValidator;
 import it.uniroma3.model.Activity;
-import it.uniroma3.model.Partecipazione;
+import it.uniroma3.model.Facility;
+import it.uniroma3.model.Participation;
 import it.uniroma3.model.Student;
 import it.uniroma3.service.ActivityService;
 import it.uniroma3.service.PartecipazioneService;
@@ -55,9 +56,19 @@ public class ActivityController {
     }
 
 	@RequestMapping("/activities")
-	public String attivita(Model model) {
-		//model.addAttribute("activities", this.activityService.findByFacility());
-		model.addAttribute("activities", this.activityService.findAll());
+	public String attivita(Model model, HttpSession session) {
+		
+		
+		
+		
+		Facility current = null; 						//<----------------DA GESTIRE CON FACILITY DEL RESPONSABILE
+														//SALVATO IN SESSIONE
+		
+		
+		
+		
+		model.addAttribute("activities", this.activityService.findByFacility(current));
+		//model.addAttribute("activities", this.activityService.findAll());
 		return "activitiesList";
 	}
 
@@ -96,7 +107,7 @@ public class ActivityController {
 			current.addActivity(activity);
 			activityService.save(activity);
 			*/
-			Partecipazione partecipazione = new Partecipazione(current, activity);
+			Participation partecipazione = new Participation(current, activity);
 
 			if(!partecipazioneService.alreadyExists(partecipazione) && !(activity.getPartecipazioni().size()==activity.getLimitePartecipanti())) {
 				activity.addPartecipazione(partecipazione);
@@ -112,8 +123,13 @@ public class ActivityController {
 		return "activitiesList";
 	}
 
-	//DA GESTIRE CASO ALLIEVO GIA' PRESENTE
 
+	@RequestMapping(value = "/activity/{id}/participations", method = RequestMethod.GET)
+	public String getPartecipazioni(@PathVariable("id") Long id, Model model) {
+		Activity activity = (Activity) this.activityService.findById(id);
+		model.addAttribute("participations", activity.getPartecipazioni());
+		return "showParticipations";
+	}
 
 }
 

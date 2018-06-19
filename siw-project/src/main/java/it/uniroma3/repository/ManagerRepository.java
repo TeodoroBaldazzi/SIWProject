@@ -8,6 +8,6 @@ import it.uniroma3.model.FacilityManager;
 
 public interface ManagerRepository extends CrudRepository<FacilityManager, Long> {
 
-	List<FacilityManager> findByEmail(String email);
+	List<FacilityManager> findByUsername(String username);
 
 }

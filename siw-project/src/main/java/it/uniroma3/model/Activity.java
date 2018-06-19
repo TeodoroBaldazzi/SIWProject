@@ -31,9 +31,13 @@ public class Activity {
 	private Map<Long,Student> allieviIscritti;
 	*/
 	
+	@ManyToOne
+	@JoinColumn(name="centro_id")
+	private Facility facility;
+	
 	
 	@OneToMany
-	private Map<Long,Partecipazione> partecipazioni;
+	private Map<Long,Participation> partecipazioni;
 	
 	
 	public Activity() {}
@@ -90,17 +94,27 @@ public class Activity {
 	}
 	*/
 	
-	public void addPartecipazione(Partecipazione a) {
+	public void addPartecipazione(Participation a) {
 		this.partecipazioni.put(a.getId(),a);
 	}
 	
-	public void removePartecipazione(Partecipazione a) {
+	public void removePartecipazione(Participation a) {
 		this.partecipazioni.remove(a.getId());
 	}
 	
-	public Map<Long, Partecipazione> getPartecipazioni(){
+	public Map<Long, Participation> getPartecipazioni(){
 		return this.partecipazioni;
 	}
+
+	public Facility getFacility() {
+		return facility;
+	}
+
+	public void setFacility(Facility facility) {
+		this.facility = facility;
+	}
+	
+	
 
 }
 

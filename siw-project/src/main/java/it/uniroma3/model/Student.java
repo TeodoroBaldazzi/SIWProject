@@ -46,7 +46,7 @@ public class Student {
 	
 	
 	@OneToMany(fetch = FetchType.EAGER)
-	private Map<Long,Partecipazione> partecipazioni;
+	private Map<Long,Participation> partecipazioni;
 	
 	
 	public Student() {}
@@ -66,14 +66,10 @@ public class Student {
 		return this.surname;
 	}
 
-	
-
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long value) {
-		this.id = value;
-	}
+	
 
 	public void setName(String name) {
 		this.name = name;
@@ -142,11 +138,11 @@ public class Student {
 	}
 	*/
 	
-	public void addPartecipazione(Partecipazione a) {
+	public void addPartecipazione(Participation a) {
 		this.partecipazioni.put(a.getId(),a);
 	}
 	
-	public void removePartecipazione(Partecipazione a) {
+	public void removePartecipazione(Participation a) {
 		this.partecipazioni.remove(a.getId());
 	}
 	

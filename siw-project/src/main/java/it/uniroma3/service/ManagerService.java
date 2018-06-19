@@ -35,7 +35,7 @@ public class ManagerService {
 	
 	
 	public boolean alreadyExists(FacilityManager responsabile) {
-		List<FacilityManager> facilities = this.managerRepository.findByEmail(responsabile.getUsername());
+		List<FacilityManager> facilities = this.managerRepository.findByUsername(responsabile.getUsername());
 		if (facilities.size() > 0)
 			return true;
 		else 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.model.Activity;
+import it.uniroma3.model.Facility;
 import it.uniroma3.repository.ActivityRepository;
 
 
@@ -35,11 +36,11 @@ public class ActivityService {
 			return null;
 	}
 
-	/*
-	public List<Activity> findByFacility() {
-		return (List<Activity>) this.activityRepository.findByFacility();
+	
+	public List<Activity> findByFacility(Facility facility) {
+		return (List<Activity>) this.activityRepository.findByFacility(facility);
 	}
-	*/
+	
 
 	/*
 	public boolean alreadyExists(Activity attivita) {
