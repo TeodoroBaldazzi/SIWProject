@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Insert new Student</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
@@ -169,13 +170,24 @@
 								<input class="form-control" type="number" th:field="*{phone}" />
 							</div>
 							<div class="form-group">
-								<label>Birthdate: &emsp;</label>
-								<input type="month" class="form-control" th:field="*{birthdate}" />
+								<label>Birthdate: </label>
+								<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.js"></script>
+								<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+								<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+
+								<div class='input-group date'>
+									<input type='text' class="form-control datetimepicker" th:field="*{birthdate}"/>
+									<span class="input-group-addon datetimepicker-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								</div>
 							</div>
 							<div class="form-group">
 								<label>Birthplace: &emsp;</label>
 								<input class="form-control" type="text" th:field="*{birthplace}" />
 							</div>
+
+
 							<!--<p class="help-block">Example block-level help text here.</p>
 
 							<label>Validation</label>
@@ -248,7 +260,9 @@
 <script src="js/easypiechart.js"></script>
 <script src="js/easypiechart-data.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/moment.js"></script>
 <script>
     window.onload = function () {
         var chart1 = document.getElementById("line-chart").getContext("2d");
@@ -260,6 +274,19 @@
         });
     };
 </script>
+<script>
+    $(function() {
+        $('.datetimepicker').datetimepicker({
+            viewMode: 'years',
+            format: 'DD-MM-YYYY'
+		});
+
+        $('.datetimepicker-addon').on('click', function() {
+            $(this).prev('input.datetimepicker').data('DateTimePicker').toggle();
+        });
+    });
+</script>
+
 
 </body>
 </html>

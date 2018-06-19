@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Insert new Student</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
@@ -134,13 +135,13 @@
 			<li><a th:href="@{/home}">
 				<em class="fa fa-arrow-left"></em>
 			</a></li>
-			<li class="active">New Student</li>
+			<li class="active">New Activity</li>
 		</ol>
 	</div><!--/.row-->
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Insert Student Data</h1>
+			<h1 class="page-header">Insert Activity Info</h1>
 			<p th:text="${exists}"></p>
 		</div>
 	</div><!--/.row-->
@@ -161,8 +162,17 @@
 								<input class="form-control" type="number" th:field="*{limitePartecipanti}" />
 							</div>
 							<div class="form-group">
-								<label>Date & Time: &emsp;</label>
-								<input class="form-control" type="datetime-local" th:field="*{dataOra}" />
+								<label>Date & Time: </label>
+								<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.js"></script>
+								<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+								<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+
+								<div class='input-group date'>
+									<input type='text' class="form-control datetimepicker" th:field="*{dataOra}"/>
+									<span class="input-group-addon datetimepicker-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								</div>
 							</div>
 							<button type="submit" class="btn btn-primary">Submit </button>
 							<button type="reset" class="btn btn-default">Reset</button>
@@ -185,7 +195,9 @@
 <script src="js/easypiechart.js"></script>
 <script src="js/easypiechart-data.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/moment.js"></script>
 <script>
     window.onload = function () {
         var chart1 = document.getElementById("line-chart").getContext("2d");
@@ -196,6 +208,18 @@
             scaleFontColor: "#c5c7cc"
         });
     };
+</script>
+<script>
+    $(function() {
+        $('.datetimepicker').datetimepicker({
+            format: 'DD-MM-YYYY  HH:mm',
+            sideBySide: true,
+        });
+
+        $('.datetimepicker-addon').on('click', function() {
+            $(this).prev('input.datetimepicker').data('DateTimePicker').toggle();
+        });
+    });
 </script>
 
 </body>
