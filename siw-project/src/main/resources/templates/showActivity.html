@@ -17,7 +17,7 @@
 			<span th:text="${activity.getDataOra().toLocaleString()}"></span>
 		</div>
 		<div>
-			<span th:text="'Totale iscritti: ' + ${activity.getAllieviIscritti().size()} + ' / '+ ${activity.getLimitePartecipanti()}"></span>
+			<span th:text="'Totale iscritti: ' + ${activity.getPartecipazioni().size()} + ' / '+ ${activity.getLimitePartecipanti()}"></span>
 		</div>
 	</div>
 	<div style="text-align: center">

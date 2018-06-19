@@ -97,6 +97,10 @@ public class Activity {
 	public void removePartecipazione(Partecipazione a) {
 		this.partecipazioni.remove(a.getId());
 	}
+	
+	public Map<Long, Partecipazione> getPartecipazioni(){
+		return this.partecipazioni;
+	}
 
 }
 

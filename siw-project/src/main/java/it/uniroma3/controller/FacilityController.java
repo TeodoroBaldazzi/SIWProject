@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import it.uniroma3.controller.validator.FacilityValidator;
 import it.uniroma3.model.Facility;
+import it.uniroma3.model.FacilityManager;
 import it.uniroma3.service.FacilityService;
 
 @Controller
+@SessionAttributes({"facility","manager"})
 public class FacilityController {
 
 	@Autowired
@@ -54,11 +57,14 @@ public class FacilityController {
 		}
 		else
 			if (!bindingResult.hasErrors()) {
-				this.facilityService.save(facility);
-				model.addAttribute("facilities", this.facilityService.findAll());
-				return "facilitiesList";
+				//this.facilityService.save(facility);
+				//model.addAttribute("facilities", this.facilityService.findAll());
+				//return "facilitiesList";
+				model.addAttribute("facility",facility);
+				model.addAttribute("manager",new FacilityManager());
+				return "managerForm";
 			}
-
+		
 		return "facilityForm";
 	}
 

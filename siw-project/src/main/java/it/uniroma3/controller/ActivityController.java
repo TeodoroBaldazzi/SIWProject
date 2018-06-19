@@ -25,10 +25,11 @@ import it.uniroma3.model.Partecipazione;
 import it.uniroma3.model.Student;
 import it.uniroma3.service.ActivityService;
 import it.uniroma3.service.PartecipazioneService;
+import it.uniroma3.service.StudentService;
 
 
 @Controller
-@SessionAttributes({"activity","activities","partecipazione"})
+@SessionAttributes({"activity","activities","partecipazione","student"})
 public class ActivityController {
 
 	@Autowired
@@ -36,6 +37,7 @@ public class ActivityController {
 
 	@Autowired
 	private PartecipazioneService partecipazioneService;
+	
 
 	@Autowired
 	private ActivityValidator validator;
@@ -96,13 +98,15 @@ public class ActivityController {
 			*/
 			Partecipazione partecipazione = new Partecipazione(current, activity);
 
-			if(!partecipazioneService.alreadyExists(partecipazione)) {
-				current.addPartecipazione(partecipazione);
+			if(!partecipazioneService.alreadyExists(partecipazione) && !(activity.getPartecipazioni().size()==activity.getLimitePartecipanti())) {
 				activity.addPartecipazione(partecipazione);
+				this.activityService.save(activity);
+				
+				model.addAttribute("student",current);
 				model.addAttribute("partecipazione", partecipazione);
 				return "savePartecipazione";
 			}
-			model.addAttribute("exists","true");
+			model.addAttribute("exists","Cannot perform operation");
 
 		}
 		return "activitiesList";

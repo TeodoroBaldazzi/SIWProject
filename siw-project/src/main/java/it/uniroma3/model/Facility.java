@@ -30,10 +30,13 @@ public class Facility {
 	@JoinColumn(name="centro_id")
 	private List<Activity> attivitaSvolte;
 
+	/*
 	@OneToMany(mappedBy="centroDiAppartenenza")
 	private List<Responsabile> responsabili;
-
-
+	*/
+	@OneToOne(mappedBy="centroDiAppartenenza",cascade=CascadeType.ALL)
+	private FacilityManager responsabile;
+	
 	public Facility() {}
 
 	public Facility(String name, String surname, String city) {
@@ -100,5 +103,15 @@ public class Facility {
 	public void setMaxCapacity(Integer maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
+
+	public FacilityManager getResponsabile() {
+		return responsabile;
+	}
+
+	public void setResponsabile(FacilityManager responsabile) {
+		this.responsabile = responsabile;
+	}
+	
+	
 }
 

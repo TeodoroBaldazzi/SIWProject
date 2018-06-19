@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Insert FacilityManager</h4>
+		<p th:text="${exists}"></p>
+		<div th:if="${esistente!=null}">
+			<div>
+				<span th:text="${esistente.name}"></span>
+			</div>
+			<div>
+				<span th:text="${esistente.address}"></span>
+			</div>
+			<div>
+				<span th:text="${esistente.email}"></span>
+			</div>
+			<div>
+				<span th:text="${esistente.phone}"></span>
+			</div>
+			<div>
+				<span th:text="${esistente.maxCapacity}"></span>
+			</div>
+		</div>
+	</div>
+	<form th:action="@{/manager}" method="POST" th:object="${manager}">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" th:field="*{name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+			</tr>
+			<tr>
+				<td>Surname:</td>
+				<td><input type="text" th:field="*{surname}" /></td>
+				<td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></td>
+			</tr>
+			<tr>
+				<td>Username:</td>
+				<td><input type="text" th:field="*{username}" /></td>
+				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+			</tr>
+			<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

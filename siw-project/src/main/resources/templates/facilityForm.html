@@ -6,25 +6,26 @@
 </head>
 <body>
 	<div>
-		<h4 class="title">Insert Activity</h4>
+		<h4 class="title">Insert Facility</h4>
 		<p th:text="${exists}"></p>
-		<div th:if="${exists!=null && exists.equals('Facility already exists')}">
-		<div>
-			<span th:text="${facility.name}"></span>
+		<div
+			th:if="${exists!=null && exists.equals('Facility already exists')}">
+			<div>
+				<span th:text="${facility.name}"></span>
+			</div>
+			<div>
+				<span th:text="${facility.address}"></span>
+			</div>
+			<div>
+				<span th:text="${facility.email}"></span>
+			</div>
+			<div>
+				<span th:text="${facility.phone}"></span>
+			</div>
+			<div>
+				<span th:text="${facility.maxCapacity}"></span>
+			</div>
 		</div>
-		<div>
-			<span th:text="${facility.address}"></span>
-		</div>
-		<div>
-			<span th:text="${facility.email}"></span>
-		</div>
-		<div>
-			<span th:text="${facility.phone}"></span>
-		</div>
-		<div>
-			<span th:text="${facility.maxCapacity}"></span>
-		</div>
-	</div>
 	</div>
 	<form th:action="@{/facility}" method="POST" th:object="${facility}">
 		<table>
@@ -51,9 +52,10 @@
 			<tr>
 				<td>MaxCapacity:</td>
 				<td><input type="text" th:field="*{maxCapacity}" /></td>
-				<td th:if="${#fields.hasErrors('maxCapacity')}" th:errors="*{maxCapacity}"></td>
-			</tr>		
-				<td><button type="submit">Submit</button></td>
+				<td th:if="${#fields.hasErrors('maxCapacity')}"
+					th:errors="*{maxCapacity}"></td>
+			</tr>
+			<td><button type="submit">Submit</button></td>
 			</tr>
 		</table>
 	</form>

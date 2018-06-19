@@ -3,7 +3,7 @@ package it.uniroma3.model;
 import javax.persistence.*;
 
 @Entity
-public class Responsabile {
+public class FacilityManager {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,15 +15,19 @@ public class Responsabile {
 	@Column(nullable=false)
 	private String surname;
 	
+	@Column(nullable=false)
+	private String username;
+	
 	@ManyToOne
     @JoinColumn(name = "centro_id")
 	private Facility centroDiAppartenenza;
 
-	public Responsabile() {}
+	public FacilityManager() {}
 
-	public Responsabile(String name, String surname, String city) {
+	public FacilityManager(String name, String surname, String username) {
 		this.name = name;
 		this.surname = surname;
+		this.username = username;
 	}
 
 	public String getName() {
@@ -45,6 +49,23 @@ public class Responsabile {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Facility getCentroDiAppartenenza() {
+		return centroDiAppartenenza;
+	}
+
+	public void setCentroDiAppartenenza(Facility centroDiAppartenenza) {
+		this.centroDiAppartenenza = centroDiAppartenenza;
+	}
+	
 	
 	
 }
