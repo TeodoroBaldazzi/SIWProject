@@ -2,6 +2,7 @@ package it.uniroma3.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import it.uniroma3.model.Role;
 import it.uniroma3.model.User;
@@ -38,4 +39,7 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
 
+    public List<User> findAll(){
+        return this.userRepository.findAll();
+    }
 }

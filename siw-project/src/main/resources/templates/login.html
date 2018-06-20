@@ -19,11 +19,14 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<form th:action="@{/registration}" method="get">
-						<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+					<form th:if="${noUsers}" th:action="@{/registration}" method="get">
+						<label class="form-control" style="text-align: center">IT'S THE FIRST TIME<br /></label>
+						<button class="btn btn-md btn-primary btn-block" type="Submit">Create an admin account</button>
 					</form>
 
-					<form role="form" th:action="@{/login}" method="POST">
+					<span th:text="${successMessage}"></span>
+
+					<form th:if="${!noUsers}" role="form" th:action="@{/app-login}" method="POST">
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="E-mail" name="email" type="text" autofocus="">
@@ -31,12 +34,10 @@
 							<div class="form-group">
 								<input class="form-control" placeholder="Password" name="password" type="password" value="">
 							</div>
-							<div class="checkbox">
-								<label>
-									<input name="remember" type="checkbox" value="Remember Me">Remember Me
-								</label>
+							<div class="form-group" th:if="${(param.error != null) and (param.error[0] == 'true')}">
+								<label class="has-error">* wrong mail or password</label>
 							</div>
-							<input type="submit" class="btn btn-primary">Login</input></fieldset>
+							<input type="submit" class="btn btn-primary" value="Login" /></fieldset>
 					</form>
 				</div>
 			</div>

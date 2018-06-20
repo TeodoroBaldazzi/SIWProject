@@ -9,14 +9,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-
+import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes({"user"})
@@ -24,10 +23,20 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
-    
+
+
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView();
+
+        boolean noUsers;
+        if (userService.findAll().isEmpty())
+            noUsers=true;
+        else
+            noUsers=false;
+
+        modelAndView.addObject("noUsers", noUsers);
+
         modelAndView.setViewName("login");
         return modelAndView;
     }
@@ -43,40 +52,34 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
-        if (userExists != null) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
-        }
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registration");
-        } else {
-            userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("/registration");
+    public String createNewUser(@ModelAttribute("user") User user, Model model) {
+        this.userService.saveUser(user);
+        model.addAttribute("successMessage", "User has been registered successfully");
 
-        }
-        return modelAndView;
+        boolean noUsers;
+        if (userService.findAll().isEmpty())
+            noUsers=true;
+        else
+            noUsers=false;
+
+        model.addAttribute("noUsers", noUsers);
+
+
+        //modelAndView.addObject("user", user);
+        return "login";
     }
 
+
     @RequestMapping(value="/home", method = RequestMethod.GET)
-    public ModelAndView home(Model model){
+    public ModelAndView home(Model model, HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        
-        
-        
-        model.addAttribute("user",user);
-        
-        
-        
-        modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+
+        session.setAttribute("currentUser", user);
+
+        session.setAttribute("userName",   user.getName() + " " + user.getLastName());
+
         modelAndView.setViewName("index");
         return modelAndView;
     }

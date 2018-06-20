@@ -7,13 +7,15 @@ import java.util.Map;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GeneratorType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Student {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="course_seq")
+	@SequenceGenerator(name="seq", sequenceName="student_sequence", initialValue = 2564, allocationSize=1)
 	private Long id;
 	
 	@Column(nullable=false)
