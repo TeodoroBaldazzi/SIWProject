@@ -1,51 +1,190 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Insert Manager</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/datepicker3.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 </head>
 <body>
-	<div>
-		<h4 class="title">Insert FacilityManager</h4>
-		<p th:text="${exists}"></p>
-		<div th:if="${esistente!=null}">
-			<div>
-				<span th:text="${esistente.name}"></span>
-			</div>
-			<div>
-				<span th:text="${esistente.address}"></span>
-			</div>
-			<div>
-				<span th:text="${esistente.email}"></span>
-			</div>
-			<div>
-				<span th:text="${esistente.phone}"></span>
-			</div>
-			<div>
-				<span th:text="${esistente.maxCapacity}"></span>
-			</div>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span></button>
+			<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
 		</div>
+	</div><!-- /.container-fluid -->
+</nav>
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+	<div class="profile-sidebar">
+		<div class="profile-userpic">
+			<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+		</div>
+		<div class="profile-usertitle">
+			<div class="profile-usertitle-name">Username</div>
+			<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+		</div>
+		<div class="clear"></div>
 	</div>
-	<form th:action="@{/manager}" method="POST" th:object="${manager}">
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><input type="text" th:field="*{name}" /></td>
-				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
-			</tr>
-			<tr>
-				<td>Surname:</td>
-				<td><input type="text" th:field="*{surname}" /></td>
-				<td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></td>
-			</tr>
-			<tr>
-				<td>Username:</td>
-				<td><input type="text" th:field="*{username}" /></td>
-				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
-			</tr>
-			<td><button type="submit">Submit</button></td>
-			</tr>
-		</table>
+	<div class="divider"></div>
+	<form role="search">
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Search">
+		</div>
 	</form>
+	<ul class="nav menu">
+		<li><a th:href="@{/home}"><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
+		<li><a th:href="@{/dashboard}"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
+		<li class="parent "><a href="#sub-item-2">
+			<em class="fa fa-list">&nbsp;</em> Activities
+		</a>
+			<ul class="children" id="sub-item-2">
+				<li><a th:href="@{/addActivity}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Activity
+				</a></li>
+				<li><a th:href="@{/activities}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Activity List
+				</a></li>
+			</ul>
+		</li><li class="parent "><a href="#sub-item-1">
+		<em class="fa fa-users">&nbsp;</em> Students
+	</a>
+		<ul class="children" id="sub-item-1">
+			<li><a style="background-color: #30a5ff; color: white" th:href="@{/#}">
+				<span class="fa fa-arrow-right">&nbsp;</span> Insert new Student
+			</a></li>
+			<li><a th:href="@{/students}">
+				<span class="fa fa-arrow-right">&nbsp;</span> Students List
+			</a></li>
+		</ul>
+	</li>
+
+		<li th:if="${session.isAdmin}" class="parent "><a href="#sub-item-3">
+			<em class="fa fa-users">&nbsp;</em> Facilities
+		</a>
+			<ul class="children" id="sub-item-3">
+				<li><a th:href="@{/addFacility}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Add new Facility
+				</a></li>
+				<li><a th:href="@{/facilities}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Facility List
+				</a></li>
+			</ul>
+		</li>
+		<li><a th:href="@{/app-logout}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+	</ul>
+</div><!--/.sidebar-->
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a th:href="@{/home}">
+				<em class="fa fa-arrow-left"></em>
+			</a></li>
+			<li class="active">New Manager</li>
+		</ol>
+	</div><!--/.row-->
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Insert Manager Data</h1>
+			<p th:text="${exists}"></p>
+			<div th:if="${esistente!=null}">
+				<div>
+					<span th:text="${esistente.name}"></span>
+				</div>
+				<div>
+					<span th:text="${esistente.address}"></span>
+				</div>
+				<div>
+					<span th:text="${esistente.email}"></span>
+				</div>
+				<div>
+					<span th:text="${esistente.phone}"></span>
+				</div>
+				<div>
+					<span th:text="${esistente.maxCapacity}"></span>
+				</div>
+			</div>		</div>
+	</div><!--/.row-->
+
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="col-md-6">
+						<form role="form" th:action="@{/manager}" method="POST" th:object="${userManager}">
+							<div class="form-group">
+								<label>Name: &emsp;</label>
+								<input class="form-control" type="text" th:field="*{name}" />
+								<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+							</div>
+							<div class="form-group">
+								<label>Surname: &emsp;</label>
+								<input class="form-control" type="text" th:field="*{lastName}" />
+								<span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastName}"></span>
+							</div>
+							<div class="form-group">
+								<label>Username: &emsp;</label>
+								<input class="form-control" th:type="username" th:field="*{username}" />
+								<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+							</div>
+							<div class="form-group">
+								<label>Password: &emsp;</label>
+								<input class="form-control" type="password" th:field="*{password}" />
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Submit </button>
+							<button type="reset" class="btn btn-default">Reset</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.panel-->
+	</div><!-- /.col-->
+	<footer style="position:fixed; bottom:0; right:50px;">
+		<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
+	</footer><!--/.row-->
+</div>	<!--/.main-->
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/chart-data.js"></script>
+<script src="js/easypiechart.js"></script>
+<script src="js/easypiechart-data.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/moment.js"></script>
+<script>
+    window.onload = function () {
+        var chart1 = document.getElementById("line-chart").getContext("2d");
+        window.myLine = new Chart(chart1).Line(lineChartData, {
+            responsive: true,
+            scaleLineColor: "rgba(0,0,0,.2)",
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleFontColor: "#c5c7cc"
+        });
+    };
+</script>
+
+
 </body>
 </html>

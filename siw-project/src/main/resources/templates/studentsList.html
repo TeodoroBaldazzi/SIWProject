@@ -148,7 +148,7 @@
 			<tr th:each="student : ${students}">
 				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" th:href="@{'/'+'student' + '/' + ${student.id}}" th:text="${student.name}"></a></td>
 				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" th:href="@{'/'+'student' + '/' + ${student.id}}" th:text="${student.surname}"></a></td>
-				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" th:href="@{'/'+'student' + '/' + ${student.id}}" th:text="${student.email}"></a></td>
+				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" th:href="@{'/'+'student' + '/' + ${student.id}}" th:text="${student.username}"></a></td>
 			</tr>
 			</tbody>
 		</table>

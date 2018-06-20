@@ -9,6 +9,6 @@ import it.uniroma3.model.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    public User findByEmail(String email);
+    public User findByUsername(String username);
 
 }

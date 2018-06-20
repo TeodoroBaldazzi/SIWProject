@@ -32,6 +32,14 @@ public class ManagerService {
 		else
 			return null;
 	}
+
+	public FacilityManager findByUsername(String username){
+		List<FacilityManager> manager = this.managerRepository.findByUsername(username);
+		if (manager.isEmpty())
+			return null;
+		else
+			return manager.get(0);
+	}
 	
 	
 	public boolean alreadyExists(FacilityManager responsabile) {

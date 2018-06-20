@@ -1,7 +1,9 @@
 package it.uniroma3.controller;
 
 
+import it.uniroma3.model.Role;
 import it.uniroma3.model.User;
+import it.uniroma3.service.ManagerService;
 import it.uniroma3.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ManagerService managerService;
 
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
@@ -53,7 +57,7 @@ public class LoginController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String createNewUser(@ModelAttribute("user") User user, Model model) {
-        this.userService.saveUser(user);
+        this.userService.saveAdminUser(user);
         model.addAttribute("successMessage", "User has been registered successfully");
 
         boolean noUsers;
@@ -74,10 +78,19 @@ public class LoginController {
     public ModelAndView home(Model model, HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+        User user = userService.findUserByUsername(auth.getName());
 
-        session.setAttribute("currentUser", user);
 
+        boolean isAdmin=false;
+        for (Role r : user.getRoles()) {
+            if(r.getRole().equals("ADMIN"))
+                isAdmin=true;
+        }
+
+        session.setAttribute("isAdmin", isAdmin);
+
+        if(!isAdmin)
+            session.setAttribute("currentFacility", this.managerService.findByUsername(user.getUsername()));
         session.setAttribute("userName",   user.getName() + " " + user.getLastName());
 
         modelAndView.setViewName("index");

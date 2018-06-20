@@ -17,10 +17,9 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "email")
-    @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
-    private String email;
+    @Column(name = "username")
+    @NotEmpty(message = "*Please provide a username")
+    private String username;
 
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
@@ -75,12 +74,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getActive() {

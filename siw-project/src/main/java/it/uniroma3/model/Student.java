@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Student {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="course_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	@SequenceGenerator(name="seq", sequenceName="student_sequence", initialValue = 2564, allocationSize=1)
 	private Long id;
 	

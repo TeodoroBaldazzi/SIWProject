@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import it.uniroma3.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,7 +69,7 @@ public class FacilityController {
 				//model.addAttribute("facilities", this.facilityService.findAll());
 				//return "facilitiesList";
 				model.addAttribute("facility",facility);
-				model.addAttribute("manager",new FacilityManager());
+				model.addAttribute("userManager", new User());
 				return "managerForm";
 			}
 		
