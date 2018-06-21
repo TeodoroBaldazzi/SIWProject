@@ -30,7 +30,7 @@ public class LoginController {
 
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-    public ModelAndView login(){
+    public ModelAndView login(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
 
         boolean noUsers;
@@ -41,7 +41,12 @@ public class LoginController {
 
         modelAndView.addObject("noUsers", noUsers);
 
+
         modelAndView.setViewName("login");
+
+        if(session.getAttribute("userName")!=null)
+            modelAndView.setViewName("index");
+
         return modelAndView;
     }
 
@@ -73,8 +78,7 @@ public class LoginController {
         return "login";
     }
 
-
-    @RequestMapping(value="/home", method = RequestMethod.GET)
+        @RequestMapping(value="/home", method = RequestMethod.GET)
     public ModelAndView home(Model model, HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

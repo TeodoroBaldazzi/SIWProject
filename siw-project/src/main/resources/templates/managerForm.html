@@ -32,7 +32,7 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 	<div class="profile-sidebar">
 		<div class="profile-userpic">
-			<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+			<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="" />
 		</div>
 		<div class="profile-usertitle">
 			<div class="profile-usertitle-name">Username</div>
@@ -60,20 +60,21 @@
 					<span class="fa fa-arrow-right">&nbsp;</span> Activity List
 				</a></li>
 			</ul>
-		</li><li class="parent "><a href="#sub-item-1">
-		<em class="fa fa-users">&nbsp;</em> Students
-	</a>
-		<ul class="children" id="sub-item-1">
-			<li><a style="background-color: #30a5ff; color: white" th:href="@{/#}">
-				<span class="fa fa-arrow-right">&nbsp;</span> Insert new Student
-			</a></li>
-			<li><a th:href="@{/students}">
-				<span class="fa fa-arrow-right">&nbsp;</span> Students List
-			</a></li>
-		</ul>
-	</li>
+		</li>
+		<li class="parent "><a href="#sub-item-1">
+			<em class="fa fa-users">&nbsp;</em> Students
+		</a>
+			<ul class="children" id="sub-item-1">
+				<li><a style="background-color: #30a5ff; color: white" th:href="@{/addStudent}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Student
+				</a></li>
+				<li><a th:href="@{/students}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Students List
+				</a></li>
+			</ul>
+		</li>
 
-		<li th:if="${session.isAdmin}" class="parent "><a href="#sub-item-3">
+		<li th:if="${#ctx.#httpSession.getAttribute('isAdmin')}" class="parent "><a href="#sub-item-3">
 			<em class="fa fa-users">&nbsp;</em> Facilities
 		</a>
 			<ul class="children" id="sub-item-3">
@@ -119,7 +120,8 @@
 				<div>
 					<span th:text="${esistente.maxCapacity}"></span>
 				</div>
-			</div>		</div>
+			</div>
+		</div>
 	</div><!--/.row-->
 
 
@@ -137,11 +139,11 @@
 							<div class="form-group">
 								<label>Surname: &emsp;</label>
 								<input class="form-control" type="text" th:field="*{lastName}" />
-								<span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastName}"></span>
+								<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
 							</div>
 							<div class="form-group">
 								<label>Username: &emsp;</label>
-								<input class="form-control" th:type="username" th:field="*{username}" />
+								<input class="form-control" th:type="text" th:field="*{username}" />
 								<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 							</div>
 							<div class="form-group">

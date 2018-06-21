@@ -26,7 +26,7 @@ import it.uniroma3.model.FacilityManager;
 import it.uniroma3.service.FacilityService;
 
 @Controller
-@SessionAttributes({"facility","manager"})
+@SessionAttributes({"manager"})
 public class FacilityController {
 
 	@Autowired
@@ -54,7 +54,7 @@ public class FacilityController {
 	}
 
 	@RequestMapping(value = "/facility", method = RequestMethod.POST)
-	public String newCentri(@Valid @ModelAttribute("facility") Facility facility, Model model, BindingResult bindingResult) {		
+	public String newCentri(@Valid @ModelAttribute("facility") Facility facility, Model model,HttpSession session, BindingResult bindingResult) {
 		this.validator.validate(facility, bindingResult);
 
 		if (this.facilityService.alreadyExists(facility)) {
@@ -69,6 +69,7 @@ public class FacilityController {
 				//model.addAttribute("facilities", this.facilityService.findAll());
 				//return "facilitiesList";
 				model.addAttribute("facility",facility);
+				session.setAttribute("facility", facility);
 				model.addAttribute("userManager", new User());
 				return "managerForm";
 			}
@@ -87,7 +88,7 @@ public class FacilityController {
 	
 	@RequestMapping(value = "/facility/{id}/activities", method = RequestMethod.GET)
 	public String getAttivita(@PathVariable("id") Long id, Model model) {
-		Facility facility = (Facility) this.facilityService.findById(id);
+		Facility facility = this.facilityService.findById(id);
 		model.addAttribute("facility",facility);
 		//model.addAttribute("activities", facility.getAttivitaSvolte());
 		return "chooseTemporalFilter";

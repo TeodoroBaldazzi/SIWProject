@@ -3,6 +3,7 @@ package it.uniroma3.service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import it.uniroma3.model.Role;
 import it.uniroma3.model.User;
@@ -43,8 +44,11 @@ public class UserServiceImpl implements UserService{
     public void saveManagerUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("MANAGER");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByRole("MANAGER"));
+
+        user.setRoles(roles);
         userRepository.save(user);
     }
 

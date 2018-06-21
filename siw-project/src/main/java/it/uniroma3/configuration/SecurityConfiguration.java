@@ -51,14 +51,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/app-login")
-                .successForwardUrl("/home")
+                .successForwardUrl("/home").defaultSuccessUrl("/home", true)
                 //.defaultSuccessUrl("/home")
                 .failureUrl("/login?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout()
                 .logoutUrl("/app-logout")
-                .logoutSuccessUrl("/login").and().exceptionHandling()
+                .logoutSuccessUrl("/login").invalidateHttpSession(true).and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
 
