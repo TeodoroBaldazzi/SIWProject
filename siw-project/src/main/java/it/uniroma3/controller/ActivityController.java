@@ -119,7 +119,9 @@ public class ActivityController {
 				//this.activityService.save(activity);
 				
 				model.addAttribute("searchedStudent",current);
-				
+
+				model.addAttribute("exists",null);
+
 				model.addAttribute("partecipazione", partecipazione);
 				return "savePartecipazione";
 			}
