@@ -2,7 +2,8 @@
 
 Casi d’uso
 
-Caso UC1: Iscrizione nuovo Allievo – Attore primario: Responsabile del centro
+Caso UC1: Iscrizione nuovo Allievo 
+Attore primario: Responsabile del centro
 Scenario principale di successo: 
 1.	Un Allievo si reca dal Responsabile del Centro per effettuare l’iscrizione.
 2.	Il Responsabile inizia la registrazione di un nuovo Allievo.
@@ -17,7 +18,8 @@ Estensioni:
 2.	Il Sistema mostra tali informazioni
 
 
-Caso UC2: Iscrizione a una o più Attività – Attore primario: Responsabile del centro
+Caso UC2: Iscrizione a una o più Attività
+Attore primario: Responsabile del centro
 Scenario principale di successo: 
 1.	Un Allievo si reca dal Responsabile del Centro per iscriversi a un’Attività.
 2.	Il Responsabile chiede all’Allievo il suo codice identificativo (tessera).
@@ -37,7 +39,8 @@ Estensioni:
 2.	Il Sistema mostra un messaggio di errore
 
 
-Caso UC3: Aggiunta di una nuova Attività – Attore primario: Responsabile del centro
+Caso UC3: Aggiunta di una nuova Attività 
+Attore primario: Responsabile del centro
 Scenario principale di successo:
 1.	Il Responsabile vuole aggiungere una nuova Attività tra quelle disponibili per quel Centro.
 2.	Il Responsabile inizia l’aggiunta di una nuova Attività.
@@ -47,14 +50,16 @@ Scenario principale di successo:
 
 
 
-Caso UC4: Visione statistiche Attività del Centro – Attore primario: Responsabile del centro
+Caso UC4: Visione statistiche Attività del Centro
+Attore primario: Responsabile del centro
 Scenario principale di successo:
 1.	Il Responsabile vuole vedere le Attività svolte nel Centro con le relative partecipazioni.
 2.	Il Responsabile accede alla visione statistiche.
 3.	Il Sistema mostra l’elenco delle Attività, con la relativa partecipazione.
 
 
-Caso UC5: Visualizzazione Attività dei Centri in un periodo di tempo (compreso tra due date) – Attore primario: Direttore dell’azienda
+Caso UC5: Visualizzazione Attività dei Centri in un periodo di tempo (compreso tra due date) 
+Attore primario: Direttore dell’azienda
 Scenario principale di successo:
 1.	Il Direttore vuole vedere le Attività dei Centri in un periodo di tempo .
 2.	Il Direttore accede alla gestione dei Centri.
@@ -63,7 +68,8 @@ Scenario principale di successo:
 5.	Il Sistema mostra le partecipazioni alle singole Attività da parte degli Allievi.
 
 
-Caso UC6: Aggiunta di un nuovo Centro – Attore primario: Direttore dell’azienda
+Caso UC6: Aggiunta di un nuovo Centro 
+Attore primario: Direttore dell’azienda
 Scenario principale di successo:
 1.	Il Direttore vuole aggiungere un nuovo Centro di formazione.
 2.	Il Direttore inizia l’inserimento di un nuovo Centro di formazione.
