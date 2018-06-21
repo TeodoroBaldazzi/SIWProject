@@ -10,12 +10,12 @@
 		<h4 class="title">Fornisci id Studente</h4>
 		<p th:text="${exists}"></p>
 	</div>
-	<form th:action="@{/handleParticipations}" method="GET">
+	<form th:action="@{/handleParticipations}" method="POST">
 		<table>
 			<tr>
 				<td>Email:</td>
 				<td><input type="text" name="email" />
-				<span tx:text="${errorParam}"></span></td>
+				<span th:text="${errorParam}"></span></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Cerca Allievo</button></td>

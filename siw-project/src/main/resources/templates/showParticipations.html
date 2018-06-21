@@ -11,7 +11,7 @@
 		<div>
 			<table>
 				<tr th:each="participation : ${participations}">
-					<td><span th:text="${participation.value.getAllievo().getName() + ' ' + participation.value.getAllievo().getSurname()}"></span></a></td>
+					<td><span th:text="${participation.getAllievo().getName() + ' ' + participation.getAllievo().getSurname()}"></span></td>
 				</tr>
 			</table>
 		</div>

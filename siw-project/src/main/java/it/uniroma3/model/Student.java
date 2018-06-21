@@ -1,5 +1,6 @@
 package it.uniroma3.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,8 +48,8 @@ public class Student {
 	*/
 	
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	private Map<Long,Participation> partecipazioni;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Participation> partecipazioni;
 	
 	
 	public Student() {}
@@ -57,7 +58,7 @@ public class Student {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
-		partecipazioni = new HashMap<>();
+		partecipazioni = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -141,11 +142,11 @@ public class Student {
 	*/
 	
 	public void addPartecipazione(Participation a) {
-		this.partecipazioni.put(a.getId(),a);
+		this.partecipazioni.add(a);
 	}
 	
 	public void removePartecipazione(Participation a) {
-		this.partecipazioni.remove(a.getId());
+		this.partecipazioni.remove(a);
 	}
 	
 

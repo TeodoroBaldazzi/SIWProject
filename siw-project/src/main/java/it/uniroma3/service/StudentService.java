@@ -39,11 +39,8 @@ public class StudentService {
 	}
 
 	public boolean alreadyExists(Student allievo) {
-		List<Student> customers = this.allievoRepository.findByNameAndSurnameAndEmail(allievo.getName(), allievo.getSurname(), allievo.getEmail());
-		if (!customers.isEmpty())
-			return true;
-		else 
-			return false;
+		Optional<Student> student = this.allievoRepository.findByEmail(allievo.getEmail());
+		return student.isPresent();
 	}
 
 	public Student findByEmail(String email) {

@@ -63,13 +63,8 @@ public class ActivityController {
 
 	@RequestMapping("/activities")
 	public String attivita(Model model, HttpSession session) {
-		
 		Facility current = (Facility)session.getAttribute("currentFacility");
-
-
-
 		model.addAttribute("activities", current.getAttivitaSvolte());
-		//model.addAttribute("activities", this.activityService.findAll());
 		return "activitiesList";
 	}
 
@@ -105,9 +100,10 @@ public class ActivityController {
 		return "activityForm";
 	}
 
-	@RequestMapping(value="/chooseActivity/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/chooseActivity/{id}", method = RequestMethod.GET)
 	public String chooseActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Activity activity = this.activityService.findById(id);
+		model.addAttribute("activity",activity);
 		if(activity!=null) {
 			Student current = (Student) session.getAttribute("student");
 			/*
@@ -118,8 +114,8 @@ public class ActivityController {
 			Participation partecipazione = new Participation(current, activity);
 
 			if(!partecipazioneService.alreadyExists(partecipazione) && !(activity.getPartecipazioni().size()==activity.getLimitePartecipanti())) {
-				activity.addPartecipazione(partecipazione);
-				this.activityService.save(activity);
+				//activity.addPartecipazione(partecipazione);
+				//this.activityService.save(activity);
 				
 				model.addAttribute("student",current);
 				model.addAttribute("partecipazione", partecipazione);
