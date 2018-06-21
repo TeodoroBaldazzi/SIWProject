@@ -26,7 +26,7 @@ import it.uniroma3.model.FacilityManager;
 import it.uniroma3.service.FacilityService;
 
 @Controller
-@SessionAttributes({"manager"})
+@SessionAttributes({"userManager","facilities","facility"})
 public class FacilityController {
 
 	@Autowired
@@ -69,7 +69,7 @@ public class FacilityController {
 				//model.addAttribute("facilities", this.facilityService.findAll());
 				//return "facilitiesList";
 				model.addAttribute("facility",facility);
-				session.setAttribute("facility", facility);
+				//session.setAttribute("facility", facility);
 				model.addAttribute("userManager", new User());
 				return "managerForm";
 			}
@@ -86,7 +86,7 @@ public class FacilityController {
 
 	}
 	
-	@RequestMapping(value = "/facility/{id}/activities", method = RequestMethod.GET)
+	@RequestMapping(value = "/facility/activities/{id}", method = RequestMethod.GET)
 	public String getAttivita(@PathVariable("id") Long id, Model model) {
 		Facility facility = this.facilityService.findById(id);
 		model.addAttribute("facility",facility);
@@ -94,6 +94,7 @@ public class FacilityController {
 		return "chooseTemporalFilter";
 	}
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping("/filterActivities")
 	public String filterActivities(@RequestParam("inferior")String inferior, @RequestParam("inferior")String superior,
 			Model model, HttpSession session) {
@@ -101,11 +102,9 @@ public class FacilityController {
 		Date inf = new Date(inferior);
 		Date sup = new Date(superior);
 		
-		//NON SO SE CONVENGA COSI' OPPURE CON UNA QUERY PARTICOLARE
 		Map<Long,Activity> tmp = facility.getAttivitaSvolte();
 		Map<Long,Activity> activities = new HashMap<>();
 		
-		//METODI AFTER E BEFORE DI DATE UTILI
 		for (Long id : tmp.keySet()) {
 			Activity a = tmp.get(id);
 			if(a.getDataOra().after(inf) && a.getDataOra().before(sup))

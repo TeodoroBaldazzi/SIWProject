@@ -45,10 +45,11 @@ public class ManagerController {
 		manager.setName(userManager.getName());
 		manager.setSurname(userManager.getLastName());
 		manager.setUsername(userManager.getUsername());
+		
 
 		if (this.managerService.alreadyExists(manager)) {
-			model.addAttribute("exists", "Manager already in charge of a facility");
-			Facility esistente = this.managerService.findById(manager.getId()).getCentroDiAppartenenza();
+			model.addAttribute("exists", "Manager already in charge of the facility: ");
+			Facility esistente = this.managerService.findByUsername(manager.getUsername()).getCentroDiAppartenenza();
 			model.addAttribute("esistente", esistente);
 			return "managerForm";
 		}

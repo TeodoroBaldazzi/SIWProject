@@ -17,22 +17,17 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "username")
-    @NotEmpty(message = "*Please provide a username")
+    @Column(name = "username", nullable=false)
     private String username;
 
-    @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
+    @Column(name = "password", nullable=false)
     @Transient
     private String password;
 
-    @Column(name = "name")
-    @NotEmpty(message = "*Please provide your name")
+    @Column(name = "name", nullable=false)
     private String name;
 
-    @Column(name = "last_name")
-    @NotEmpty(message = "*Please provide your last name")
+    @Column(name = "last_name", nullable=false)
     private String lastName;
 
     @Column(name = "active")
