@@ -1,6 +1,7 @@
 package it.uniroma3.controller;
 
 
+import it.uniroma3.controller.validator.UserValidator;
 import it.uniroma3.model.Role;
 import it.uniroma3.model.User;
 import it.uniroma3.service.ManagerService;
@@ -25,10 +26,14 @@ import javax.validation.Valid;
 @SessionAttributes({"user"})
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ManagerService managerService;
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private ManagerService managerService;
+
+	@Autowired
+	private UserValidator validator;
 
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
@@ -62,57 +67,55 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String createNewUser(@Valid @ModelAttribute(value="user") User user, Model model, BindingResult bindingResult) {
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String createNewUser(@Valid @ModelAttribute("user") User user,
+			Model model, BindingResult bindingResult) {
+		validator.validate(user, bindingResult);
 
-       /* User userExists = userService.findUserByUsername(user.getUsername());
-        if (userExists != null) {
-            bindingResult
-                    .rejectValue("username", "error.user",
-                            "There is already a user registered with the username provided");
-        }*/
-        if (bindingResult.hasErrors()) {
-            return "registration";
+		if(this.userService.findUserByUsername(user.getUsername())!=null) {
+			model.addAttribute("exists","User already exists");
+			return "registration";
+		}
+		else
+			if (!bindingResult.hasErrors()) {
+				this.userService.saveAdminUser(user);
+				model.addAttribute("successMessage", "User has been registered successfully");
+
+				boolean noUsers;
+				if (userService.findAll().isEmpty())
+					noUsers=true;
+				else
+					noUsers=false;
+
+				model.addAttribute("noUsers", noUsers);
+				return "login";
+			}
+		return "registration";
+	}
+
+
+	@RequestMapping(value="/home", method = RequestMethod.GET)
+	public ModelAndView home(Model model, HttpSession session){
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+
+
+        boolean isAdmin=false;
+        for (Role r : user.getRoles()) {
+            if(r.getRole().equals("ADMIN"))
+                isAdmin=true;
         }
-        else {
-            this.userService.saveAdminUser(user);
-            model.addAttribute("successMessage", "User has been registered successfully");
 
-            boolean noUsers;
-            if (userService.findAll().isEmpty())
-                noUsers = true;
-            else
-                noUsers = false;
+        session.setAttribute("isAdmin", isAdmin);
 
-            model.addAttribute("noUsers", noUsers);
+        if(!isAdmin)
+            session.setAttribute("currentFacility", this.managerService.findByUsername(user.getUsername()));
+        session.setAttribute("userName",   user.getName() + " " + user.getLastName());
 
-            //modelAndView.addObject("user", user);
-            return "login";
-        }
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
-        @RequestMapping(value="/home", method = RequestMethod.GET)
-        public ModelAndView home(Model model, HttpSession session){
-            ModelAndView modelAndView = new ModelAndView();
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.findUserByUsername(auth.getName());
 
-
-            boolean isAdmin=false;
-            for (Role r : user.getRoles()) {
-                if(r.getRole().equals("ADMIN"))
-                    isAdmin=true;
-            }
-
-            session.setAttribute("isAdmin", isAdmin);
-
-            if(!isAdmin)
-                session.setAttribute("currentFacility", this.managerService.findByUsername(user.getUsername()));
-            session.setAttribute("userName",   user.getName() + " " + user.getLastName());
-
-            modelAndView.setViewName("index");
-            return modelAndView;
-        }
-
-
-    }
+}

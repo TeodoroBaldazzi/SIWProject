@@ -1,5 +1,6 @@
 package it.uniroma3.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,10 @@ public class FacilityService {
 	}
 
 	public List<Facility> findAll() {
-		return (List<Facility>) this.facilityRepository.findAll();
+		List<Facility> out =  (List<Facility>) this.facilityRepository.findAll();
+		if(out!=null)
+			return out;
+		return new ArrayList<Facility>();
 	}
 	
 	public Facility findById(Long id) {

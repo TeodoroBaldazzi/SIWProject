@@ -38,10 +38,9 @@ public class ManagerController {
 
 	@RequestMapping(value = "/manager", method = RequestMethod.POST)
 	public String newManager(@Valid @ModelAttribute("userManager") User userManager,
-							 Model model, BindingResult bindingResult, HttpSession session) {
+			Model model, BindingResult bindingResult, HttpSession session) {		
+		this.validator.validate(userManager, bindingResult);
 
-
-		//this.validator.validate(userManager, bindingResult);
 		FacilityManager manager = new FacilityManager();
 		manager.setName(userManager.getName());
 		manager.setSurname(userManager.getLastName());
@@ -49,30 +48,27 @@ public class ManagerController {
 
 
 		if (this.managerService.alreadyExists(manager)) {
-			bindingResult
-					.rejectValue("username", "error.userManager",
-							"There is already a user registered with the username provided");
-		}
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("exists", "Manager already in charge of a facility");
-			Facility esistente = this.managerService.findById(manager.getId()).getCentroDiAppartenenza();
+			model.addAttribute("exists", "Manager already in charge of the facility: ");
+			Facility esistente = this.managerService.findByUsername(manager.getUsername()).getCentroDiAppartenenza();
 			model.addAttribute("esistente", esistente);
 			return "managerForm";
 		}
-		else {
-			Facility facility = (Facility) session.getAttribute("facility");
-			facility.setResponsabile(manager);
-			manager.setCentroDiAppartenenza(facility);
+		else
+			if (!bindingResult.hasErrors()) {
+				Facility facility = (Facility) session.getAttribute("facility");
+				facility.setResponsabile(manager);
+				manager.setCentroDiAppartenenza(facility);
+				
+				this.facilityService.save(facility);
+				this.managerService.save(manager);
 
-			this.facilityService.save(facility);
-			this.managerService.save(manager);
+				this.userService.saveManagerUser(userManager);
 
-			this.userService.saveManagerUser(userManager);
+				model.addAttribute("facilities", this.facilityService.findAll());
+				return "facilitiesList";
+			}
 
-			model.addAttribute("facilities", this.facilityService.findAll());
-			return "facilitiesList";
-		}
-
+		return "managerForm";
 	}
 
 }

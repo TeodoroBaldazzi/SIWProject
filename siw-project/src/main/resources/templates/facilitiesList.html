@@ -13,12 +13,10 @@
 					<th>Name</th>
 				</tr>
 				<tr th:each="facility : ${facilities}">
-					<td><a th:href="@{'facility' + '/' + ${facility.id}}"><span
+					<td><a th:href="@{'/facility' + '/' + ${facility.id}}"><span
 							th:text="${facility.name}"></span></a></td>
-				</tr>
-				<tr>
 					<td><a
-						th:href="@{'facility' + '/' + ${facility.id} + '/activities'}">
+						th:href="@{'/facility' + '/activities/' + ${facility.id}}">
 							</a></td>
 				</tr>
 			</table>
