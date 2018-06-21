@@ -99,6 +99,8 @@ public class StudentController {
 			model.addAttribute("exists", "Student already exists");
 			model.addAttribute("esistente", this.studentService.findByNameAndSurnameAndEmail(allievo.getName(),
 					allievo.getSurname(), allievo.getEmail()));
+
+			model.addAttribute("student", new Student());
 			return "studentForm";
 		}
 		else {
@@ -106,6 +108,7 @@ public class StudentController {
 				return "studentAccept";
 			}
 		}
+		model.addAttribute("student", new Student());
 		return "studentForm";
 	}
 

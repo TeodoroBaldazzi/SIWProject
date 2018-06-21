@@ -13,7 +13,7 @@
 		<div class="table-responsive table table-striped">
 			<table>
 				<tr th:each="activity : ${activities}">
-					<td><span th:text="${activity.getName() + '            Total Subscriptions:' + activity.getPartecipazioni().size()}"></span></td>
+					<td><span th:text="${activity.getName() +': '+ ' ' + '            Total Subscriptions:' + activity.getPartecipazioni().size()}"></span></td>
 				</tr>
 			</table>
 		</div>

@@ -98,6 +98,8 @@ public class ActivityController {
 			return "activitiesList";
 		}
 
+		model.addAttribute("activity", new Activity());
+
 		return "activityForm";
 	}
 
@@ -107,20 +109,12 @@ public class ActivityController {
 		model.addAttribute("activity",activity);
 		if(activity!=null) {
 			Student current = (Student) session.getAttribute("searchedStudent");
-			/*
-			activity.addAllievo(current);
-			current.addActivity(activity);
-			activityService.save(activity);
-			*/
+
 			Participation partecipazione = new Participation(current, activity);
 
 			if(!partecipazioneService.alreadyExists(partecipazione) && !(activity.getPartecipazioni().size()==activity.getLimitePartecipanti())) {
-				//activity.addPartecipazione(partecipazione);
-				//this.activityService.save(activity);
-				
+
 				model.addAttribute("searchedStudent",current);
-
-
 
 				model.addAttribute("partecipazione", partecipazione);
 				return "savePartecipazione";

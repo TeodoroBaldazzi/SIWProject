@@ -51,6 +51,8 @@ public class ManagerController {
 			model.addAttribute("exists", "Manager already in charge of the facility: ");
 			Facility esistente = this.managerService.findByUsername(manager.getUsername()).getCentroDiAppartenenza();
 			model.addAttribute("esistente", esistente);
+
+			model.addAttribute("userManager", new User());
 			return "managerForm";
 		}
 		else
@@ -67,6 +69,8 @@ public class ManagerController {
 				model.addAttribute("facilities", this.facilityService.findAll());
 				return "facilitiesList";
 			}
+
+		model.addAttribute("userManager", new User());
 
 		return "managerForm";
 	}
