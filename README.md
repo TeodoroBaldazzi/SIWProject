@@ -66,16 +66,18 @@ Scenario principale di successo:
 3.	Il Sistema mostra l’elenco delle Attività, con la relativa partecipazione.
 
 
-Caso UC5: Visualizzazione Attività dei Centri in un periodo di tempo (compreso tra due date) 
+Caso UC5: Visualizzazione Attività dei Centri nell’ultimo mese 
 
 Attore primario: Direttore dell’azienda
 
 Scenario principale di successo:
-1.	Il Direttore vuole vedere le Attività dei Centri in un periodo di tempo .
+1.	Il Direttore vuole vedere le Attività dei Centri dell’ultimo mese.
 2.	Il Direttore accede alla gestione dei Centri.
-3.	Il Sistema mostra la lista dei centri con il relativo numero di iscritti (recenti e totali) e affluenza alle Attività in quel periodo di tempo.
+3.	Il Sistema mostra la lista dei centri con il relativo numero di iscritti (recenti e totali) e affluenza alle Attività dell’ultimo mese.
 4.	Il Direttore accede al singolo Centro.
 5.	Il Sistema mostra le partecipazioni alle singole Attività da parte degli Allievi.
+
+
 
 
 Caso UC6: Aggiunta di un nuovo Centro 
