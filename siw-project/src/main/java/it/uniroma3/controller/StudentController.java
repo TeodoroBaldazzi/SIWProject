@@ -129,7 +129,7 @@ public class StudentController {
 	}
 
 
-	@RequestMapping(value="/handleParticipations", method = RequestMethod.GET)
+	@RequestMapping(value="/handleParticipations", method = RequestMethod.POST)
 	public String handleParticipations(@RequestParam("email") String email, Model model, HttpSession session) {
 		if(email!=null && !email.equals("")) {
 			Student current = this.studentService.findByEmail(email.toLowerCase());
@@ -143,7 +143,7 @@ public class StudentController {
 			return "activitiesList";
 		}
 		model.addAttribute("errorParam", "Insert email");
-		return "showStudent";
+		return "selectStudent";
 	}
 
 }

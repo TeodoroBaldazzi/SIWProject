@@ -1,7 +1,9 @@
 package it.uniroma3.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.*;
@@ -31,17 +33,17 @@ public class Activity {
 	private Map<Long,Student> allieviIscritti;
 	*/
 
-	@OneToMany
-	private Map<Long,Participation> partecipazioni;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Participation> partecipazioni;
 	
 	
-	public Activity() {}
+	public Activity() {this.partecipazioni = new ArrayList<>();}
 
 	public Activity(String name, Date dataOra, int limitePartecipanti) {
 		this.name = name;
 		this.dataOra = dataOra;
 		this.limitePartecipanti = limitePartecipanti;
-		//this.allieviIscritti = new HashMap<>();
+		this.partecipazioni = new ArrayList<>();
 		
 	}
 
@@ -70,34 +72,21 @@ public class Activity {
 		this.dataOra = dataOra;
 	}
 
-	/*
-	public Map<Long, Student> getAllieviIscritti() {
-		return allieviIscritti;
-	}
-	 */
+	
 	public Long getId() {
 		return id;
 	}
 
-	/*
-	public void addAllievo(Student a) {
-		this.allieviIscritti.put(a.getId(),a);
-	}
-	
-	public void removeAllievo(Student a) {
-		this.allieviIscritti.remove(a.getId());
-	}
-	*/
 	
 	public void addPartecipazione(Participation a) {
-		this.partecipazioni.put(a.getId(),a);
+		this.partecipazioni.add(a);
 	}
 	
 	public void removePartecipazione(Participation a) {
-		this.partecipazioni.remove(a.getId());
+		this.partecipazioni.remove(a);
 	}
 	
-	public Map<Long, Participation> getPartecipazioni(){
+	public List<Participation> getPartecipazioni(){
 		return this.partecipazioni;
 	}
 	

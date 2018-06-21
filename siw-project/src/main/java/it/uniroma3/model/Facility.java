@@ -26,14 +26,11 @@ public class Facility {
 	@Column(nullable=false)
 	private Integer maxCapacity;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="facility_id")
 	private List<Activity> attivitaSvolte;
 
-	/*
-	@OneToMany(mappedBy="centroDiAppartenenza")
-	private List<Responsabile> responsabili;
-	*/
+
 	@OneToOne(mappedBy="centroDiAppartenenza",cascade=CascadeType.ALL)
 	private FacilityManager responsabile;
 	
@@ -66,21 +63,12 @@ public class Facility {
 		this.email = email;
 	}
 
-	/*
-	public Activity getAttivitabyName(String nomeAttivita) {
-		for(Activity a : attivitaSvolte)
-			if(a.getName().equals(nomeAttivita))
-				return a;
-		return null;
-	}
-	*/
-
 	public void addAttivita(Activity a) {
 		this.attivitaSvolte.add(a);
 	}
 
 	public void removeAttivita(Activity a) {
-		this.attivitaSvolte.remove(a.getId());
+		this.attivitaSvolte.remove(a);
 	}
 
 
