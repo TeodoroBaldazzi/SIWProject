@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import it.uniroma3.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,10 @@ public class ActivityController {
 	@Autowired
 	private ActivityService activityService;
 
+
+	@Autowired
+	private FacilityService facilityService;
+
 	@Autowired
 	private PartecipazioneService partecipazioneService;
 	
@@ -59,16 +64,11 @@ public class ActivityController {
 	@RequestMapping("/activities")
 	public String attivita(Model model, HttpSession session) {
 		
-		
-		
-		
-		Facility current = null; 						//<----------------DA GESTIRE CON FACILITY DEL RESPONSABILE
-														//SALVATO IN SESSIONE
-		
-		
-		
-		
-		model.addAttribute("activities", this.activityService.findByFacility(current));
+		Facility current = (Facility)session.getAttribute("currentFacility");
+
+
+
+		model.addAttribute("activities", current.getAttivitaSvolte());
 		//model.addAttribute("activities", this.activityService.findAll());
 		return "activitiesList";
 	}
@@ -86,11 +86,18 @@ public class ActivityController {
 	}
 
 	@RequestMapping(value = "/activity", method = RequestMethod.POST)
-	public String newAttivita(@Valid @ModelAttribute("activity") Activity attivita, Model model, BindingResult bindingResult) {
+	public String newAttivita(@Valid @ModelAttribute("activity") Activity attivita, Model model, BindingResult bindingResult, HttpSession session) {
 		this.validator.validate(attivita, bindingResult);
 
 		if (!bindingResult.hasErrors()) {
+			Facility corrente = (Facility)session.getAttribute("currentFacility");
+
+			corrente.addAttivita(attivita);
+
 			this.activityService.save(attivita);
+
+			this.facilityService.save(corrente);
+
 			model.addAttribute("activities", this.activityService.findAll());
 			return "activitiesList";
 		}

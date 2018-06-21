@@ -37,10 +37,10 @@ public class ActivityService {
 	}
 
 	
-	public List<Activity> findByFacility(Facility facility) {
+	/*public List<Activity> findByFacility(Facility facility) {
 		return (List<Activity>) this.activityRepository.findByFacility(facility);
 	}
-	
+	*/
 
 	/*
 	public boolean alreadyExists(Activity attivita) {

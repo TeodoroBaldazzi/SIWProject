@@ -1,8 +1,6 @@
 package it.uniroma3.controller;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -87,20 +85,37 @@ public class FacilityController {
 	}
 	
 	@RequestMapping(value = "/facility/activities/{id}", method = RequestMethod.GET)
-	public String getAttivita(@PathVariable("id") Long id, Model model) {
+	public String getAttivita(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Facility facility = this.facilityService.findById(id);
-		model.addAttribute("facility",facility);
-		//model.addAttribute("activities", facility.getAttivitaSvolte());
-		return "chooseTemporalFilter";
+
+		Date sup = new Date();
+
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
+		Date inf = cal.getTime();
+
+		List<Activity> tmp = facility.getAttivitaSvolte();
+		List<Activity> activities = new ArrayList<>();
+
+		for (Activity a : tmp) {
+			if(a.getDataOra().after(inf) && a.getDataOra().before(sup))
+				activities.add(a);
+		}
+
+
+		model.addAttribute("activities", activities);
+		return "showActivities";
 	}
 	
-	@SuppressWarnings("deprecation")
+	/*@SuppressWarnings("deprecation")
 	@RequestMapping("/filterActivities")
-	public String filterActivities(@RequestParam("inferior")String inferior, @RequestParam("inferior")String superior,
-			Model model, HttpSession session) {
+	public String filterActivities(Model model, HttpSession session) {
 		Facility facility = (Facility) session.getAttribute("facility");
-		Date inf = new Date(inferior);
-		Date sup = new Date(superior);
+		Date inf = new Date();
+
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
+		Date sup = cal.getTime();
 		
 		Map<Long,Activity> tmp = facility.getAttivitaSvolte();
 		Map<Long,Activity> activities = new HashMap<>();
@@ -115,7 +130,7 @@ public class FacilityController {
 		model.addAttribute("activities", activities);
 		return "showActivities";
 		
-	}
+	}*/
 
 }
 

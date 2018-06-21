@@ -3,8 +3,10 @@ package it.uniroma3.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import it.uniroma3.model.Facility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -34,6 +36,9 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
+
+	@Autowired
+	private ActivityService activityService;
 
 	@Autowired
 	private StudentValidator validator;
@@ -116,7 +121,7 @@ public class StudentController {
 
 
 	@RequestMapping(value="/handleParticipations", method = RequestMethod.GET)
-	public String handleParticipations(@RequestParam("email") String email, Model model) {
+	public String handleParticipations(@RequestParam("email") String email, Model model, HttpSession session) {
 		if(email!=null && !email.equals("")) {
 			Student current = this.studentService.findByEmail(email.toLowerCase());
 			if(current==null) {
@@ -124,6 +129,8 @@ public class StudentController {
 				return "selectStudent";
 			}
 			model.addAttribute("student", current);
+			Facility corrente = (Facility)session.getAttribute("currentFacility");
+			model.addAttribute("activities", corrente.getAttivitaSvolte());
 			return "activitiesList";
 		}
 		model.addAttribute("errorParam", "Insert email");

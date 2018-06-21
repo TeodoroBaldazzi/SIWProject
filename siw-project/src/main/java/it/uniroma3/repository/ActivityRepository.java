@@ -12,7 +12,7 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 
 	List<Activity> findByName(String name);
 
-	List<Activity> findByFacility(Facility facility);
+//	List<Activity> findByFacility(Facility facility);
 
 
 }

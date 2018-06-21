@@ -30,12 +30,7 @@ public class Activity {
 	@ManyToMany
 	private Map<Long,Student> allieviIscritti;
 	*/
-	
-	@ManyToOne
-	@JoinColumn(name="centro_id")
-	private Facility facility;
-	
-	
+
 	@OneToMany
 	private Map<Long,Participation> partecipazioni;
 	
@@ -105,15 +100,6 @@ public class Activity {
 	public Map<Long, Participation> getPartecipazioni(){
 		return this.partecipazioni;
 	}
-
-	public Facility getFacility() {
-		return facility;
-	}
-
-	public void setFacility(Facility facility) {
-		this.facility = facility;
-	}
-	
 	
 
 }

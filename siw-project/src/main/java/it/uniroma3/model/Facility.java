@@ -1,7 +1,6 @@
 package it.uniroma3.model;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -27,9 +26,9 @@ public class Facility {
 	@Column(nullable=false)
 	private Integer maxCapacity;
 
-	@OneToMany(mappedBy="facility",cascade=CascadeType.ALL)
-	//@JoinColumn(name="centro_id")
-	private Map<Long,Activity> attivitaSvolte;
+	@OneToMany
+	@JoinColumn(name="facility_id")
+	private List<Activity> attivitaSvolte;
 
 	/*
 	@OneToMany(mappedBy="centroDiAppartenenza")
@@ -38,10 +37,12 @@ public class Facility {
 	@OneToOne(mappedBy="centroDiAppartenenza",cascade=CascadeType.ALL)
 	private FacilityManager responsabile;
 	
-	public Facility() {}
+	public Facility() {this.attivitaSvolte = new ArrayList<>();
+	}
 
 	public Facility(String name, String surname, String city) {
 		this.name = name;
+		this.attivitaSvolte = new ArrayList<>();
 	}
 
 
@@ -75,7 +76,7 @@ public class Facility {
 	*/
 
 	public void addAttivita(Activity a) {
-		this.attivitaSvolte.put(a.getId(),a);
+		this.attivitaSvolte.add(a);
 	}
 
 	public void removeAttivita(Activity a) {
@@ -115,11 +116,11 @@ public class Facility {
 		this.responsabile = responsabile;
 	}
 
-	public Map<Long,Activity> getAttivitaSvolte() {
+	public List<Activity> getAttivitaSvolte() {
 		return attivitaSvolte;
 	}
 
-	public void setAttivitaSvolte(Map<Long,Activity> attivitaSvolte) {
+	public void setAttivitaSvolte(List<Activity> attivitaSvolte) {
 		this.attivitaSvolte = attivitaSvolte;
 	}
 	

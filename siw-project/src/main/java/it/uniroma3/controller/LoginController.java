@@ -110,7 +110,7 @@ public class LoginController {
         session.setAttribute("isAdmin", isAdmin);
 
         if(!isAdmin)
-            session.setAttribute("currentFacility", this.managerService.findByUsername(user.getUsername()));
+            session.setAttribute("currentFacility", this.managerService.findByUsername(user.getUsername()).getCentroDiAppartenenza());
         session.setAttribute("userName",   user.getName() + " " + user.getLastName());
 
         modelAndView.setViewName("index");
