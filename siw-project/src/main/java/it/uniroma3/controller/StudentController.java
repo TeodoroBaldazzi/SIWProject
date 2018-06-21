@@ -32,7 +32,7 @@ import it.uniroma3.service.StudentService;
 
 
 @Controller
-@SessionAttributes({"student","students"})
+@SessionAttributes({"student","students","searchedStudent"})
 public class StudentController {
 
 	@Autowired
@@ -137,7 +137,7 @@ public class StudentController {
 				model.addAttribute("exists", "Student does not exist");
 				return "selectStudent";
 			}
-			model.addAttribute("student", current);
+			model.addAttribute("searchedStudent", current);
 			Facility corrente = (Facility)session.getAttribute("currentFacility");
 			model.addAttribute("activities", corrente.getAttivitaSvolte());
 			return "activitiesList";

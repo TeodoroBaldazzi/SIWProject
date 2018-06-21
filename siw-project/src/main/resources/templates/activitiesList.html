@@ -103,13 +103,13 @@
                 <td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myActivity" data-backdrop="static" data-keyboard="false"
                        th:href="@{'/' + 'activity' + '/' + ${activity.id}}" th:text="${activity.getDataOra().toLocaleString()}"></a></td>
                 <td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myActivity" data-backdrop="static" data-keyboard="false"
-                       th:href="@{'/' + 'activity' + '/' + ${activity.id} + '/participations'}">BOTTONE PARTECIPAZIONI</a></td>
-                <td><a th:if="${student!=null}" style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myActivity" data-backdrop="static" data-keyboard="false"
-                       th:href="@{'/' + 'chooseActivity' + '/' + ${activity.id}}">JOIN</a></td>          
+                       th:href="@{'/' + 'activity' + '/' + ${activity.id} + '/participations'}">Participants List</a></td>
+                <td><a th:if="${searchedStudent!=null && !=null}" style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myActivity" data-backdrop="static" data-keyboard="false"
+                       th:href="@{'/' + 'chooseActivity' + '/' + ${activity.id}}">JOIN</a></td>
             </tr>
             </tbody>
         </table>
-		<p th:text="${exists}"></p>
+<!--		<p th:text="${exists}"></p>-->
 
         <!-- Modal fake DON'T DELETE-->
         <div id="myActivity" class="modal fade" role="dialog">

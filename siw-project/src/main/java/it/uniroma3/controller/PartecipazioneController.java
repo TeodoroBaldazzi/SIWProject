@@ -31,7 +31,7 @@ public class PartecipazioneController {
 	@RequestMapping("/salvaPartecipazione")
 	public String savePartecipazione(Model model, HttpSession session) {
 		Participation partecipazione = (Participation) session.getAttribute("partecipazione");
-		Student current = (Student) session.getAttribute("student");
+		Student current = (Student) session.getAttribute("searchedStudent");
 		Activity activity = (Activity) session.getAttribute("activity");
 		
 		//current = studentService.findById(current.getId());

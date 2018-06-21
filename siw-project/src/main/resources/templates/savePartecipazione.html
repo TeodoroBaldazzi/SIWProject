@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Save Partecipazione</title>
-</head>
+
 <body>
-	<a th:href="@{/salvaPartecipazione}">Conferma</a>
+<div>
+	<div class="modal-title">
+		<a class="close" th:href="@{/activities}" >&times;</a>
+		<h4 class="modal-title" style="text-align: center">CONFIRM</h4>
+	</div>
+	<div style="text-align: center" class="modal-body">
+	<a th:href="@{/salvaPartecipazione}"><button class="btn-primary btn">Yes</button></a>	<a th:href="@{/activities}"><button class="btn btn-danger" >No</button></a>
+	</div>
+</div>
 </body>
-</html>

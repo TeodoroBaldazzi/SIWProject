@@ -94,6 +94,7 @@ public class ActivityController {
 			this.facilityService.save(corrente);
 
 			model.addAttribute("activities", this.activityService.findAll());
+
 			return "activitiesList";
 		}
 
@@ -105,7 +106,7 @@ public class ActivityController {
 		Activity activity = this.activityService.findById(id);
 		model.addAttribute("activity",activity);
 		if(activity!=null) {
-			Student current = (Student) session.getAttribute("student");
+			Student current = (Student) session.getAttribute("searchedStudent");
 			/*
 			activity.addAllievo(current);
 			current.addActivity(activity);
@@ -117,7 +118,8 @@ public class ActivityController {
 				//activity.addPartecipazione(partecipazione);
 				//this.activityService.save(activity);
 				
-				model.addAttribute("student",current);
+				model.addAttribute("searchedStudent",current);
+				
 				model.addAttribute("partecipazione", partecipazione);
 				return "savePartecipazione";
 			}
