@@ -1,12 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Activity Chosen</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Activity List</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/datepicker3.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 </head>
 <body>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span></button>
+			<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+		</div>
+	</div><!-- /.container-fluid -->
+</nav>
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+	<div class="profile-sidebar">
+		<div class="profile-userpic">
+			<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+		</div>
+		<div class="profile-usertitle">
+			<div class="profile-usertitle-name" th:text="${#ctx.#httpSession.getAttribute('userName')}"></div>
+			<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="divider"></div>
+	<ul class="nav menu">
+		<li><a th:href="@{/home}"><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
+		<li><a th:href="@{/dashboard}"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
+		<li th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" class="parent "><a href="#sub-item-2">
+			<em class="fa fa-list">&nbsp;</em> Activities
+		</a>
+			<ul class="children" id="sub-item-2">
+				<li><a th:href="@{/addActivity}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Activity
+				</a></li>
+				<li><a th:href="@{/activities}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Activity List
+				</a></li>
+			</ul>
+		</li>
+		<li th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" class="parent "><a href="#sub-item-1">
+			<em class="fa fa-users">&nbsp;</em> Students
+		</a>
+			<ul class="children" id="sub-item-1">
+				<li><a th:href="@{/addStudent}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert Student</a></li>
+				<li><a th:href="@{/students}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Students List
+				</a></li>
+			</ul>
+		</li>
+		<li th:if="${#ctx.#httpSession.getAttribute('isAdmin')}" class="parent "><a href="#sub-item-3">
+			<em class="fa fa-university">&nbsp;</em> Facilities
+		</a>
+			<ul class="children" id="sub-item-3">
+				<li><a th:href="@{/addFacility}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Add new Facility
+				</a></li>
+				<li><a th:href="@{/facilities}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Facility List
+				</a></li>
+			</ul>
+		</li>
+		<li><a th:href="@{/app-logout}" th:method="POST" ><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+	</ul>
+</div><!--/.sidebar-->
 <div>
-		<h4>Participation to Activity Added</h4>
-		<a th:href="@{/activities}"> Add Participation</a>
+		<h2 style="text-align: center">Participation to Activity Added</h2>
+		<a th:href="@{/activities}"> Add another Participation</a>
 </body>
 </html>

@@ -136,6 +136,7 @@ public class ActivityController {
 	public String getPartecipazioni(@PathVariable("id") Long id, Model model) {
 		Activity activity = (Activity) this.activityService.findById(id);
 		model.addAttribute("participations", activity.getPartecipazioni());
+		model.addAttribute("thisActivity",id);
 		return "showParticipations";
 	}
 

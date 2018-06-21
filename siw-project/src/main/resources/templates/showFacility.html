@@ -1,12 +1,15 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-<title>Facility</title>
+	<title>Student</title>
 </head>
 <body>
-	<div>
-		<h4>Facility</h4>
+<div>
+	<div class="modal-title">
+		<a class="close" th:href="@{/facilities}" >&times;</a>
+		<h4 class="modal-title" style="text-align: center">Facility</h4>
+	</div>
+	<div class="modal-body">
 		<div>
 			<span th:text="${facility.name}"></span>
 		</div>
@@ -23,6 +26,9 @@
 			<span th:text="${facility.maxCapacity}"></span>
 		</div>
 	</div>
-	<a th:href="@{/facilities}">Indietro</a>
+	<div style="text-align: center">
+		<a class="btn btn-default" th:href="@{/facilities}">OK</a>
+	</div>
+</div>
 </body>
 </html>

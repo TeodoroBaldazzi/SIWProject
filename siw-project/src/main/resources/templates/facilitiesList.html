@@ -1,27 +1,149 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Facilities</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Facilities</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/datepicker3.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 </head>
 <body>
-	<div>
-		<h4>Facilities</h4>
-		<div>
-			<table>
-				<tr>
-					<th>Name</th>
-				</tr>
-				<tr th:each="facility : ${facilities}">
-					<td><a th:href="@{'/facility' + '/' + ${facility.id}}"><span
-							th:text="${facility.name}"></span></a></td>
-					<td><a
-						th:href="@{'/facility' + '/activities/' + ${facility.id}}"> Show Activites
-							</a></td>
-				</tr>
-			</table>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span></button>
+			<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
 		</div>
+	</div><!-- /.container-fluid -->
+</nav>
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+	<div class="profile-sidebar">
+		<div class="profile-userpic">
+			<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+		</div>
+		<div class="profile-usertitle">
+			<div class="profile-usertitle-name" th:text="${#ctx.#httpSession.getAttribute('userName')}"></div>
+			<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+		</div>
+		<div class="clear"></div>
 	</div>
-	<a th:href="@{/addFacility}">Insert new facility</a>
+	<div class="divider"></div>
+	<ul class="nav menu">
+		<li><a th:href="@{/home}"><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
+		<li><a th:href="@{/dashboard}"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
+		<li th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" class="parent "><a href="#sub-item-2">
+			<em class="fa fa-list">&nbsp;</em> Activities
+		</a>
+			<ul class="children" id="sub-item-2">
+				<li><a th:href="@{/addActivity}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert new Activity
+				</a></li>
+				<li class="active"><a th:href="@{/activities}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Activity List
+				</a></li>
+			</ul>
+		</li>
+		<li th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" class="parent "><a href="#sub-item-1">
+			<em class="fa fa-users">&nbsp;</em> Students
+		</a>
+			<ul class="children" id="sub-item-1">
+				<li><a th:href="@{/addStudent}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Insert Student</a></li>
+				<li><a th:href="@{/students}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Students List
+				</a></li>
+			</ul>
+		</li>
+		<li th:if="${#ctx.#httpSession.getAttribute('isAdmin')}" class="parent "><a href="#sub-item-3">
+			<em class="fa fa-university">&nbsp;</em> Facilities
+		</a>
+			<ul class="children" id="sub-item-3">
+				<li><a th:href="@{/addFacility}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Add new Facility
+				</a></li>
+				<li><a th:href="@{/facilities}">
+					<span class="fa fa-arrow-right">&nbsp;</span> Facility List
+				</a></li>
+			</ul>
+		</li>
+		<li><a th:href="@{/app-logout}" th:method="POST" ><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+	</ul>
+</div><!--/.sidebar-->
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Facilities</h1>
+		</div>
+	</div><!--/.row-->
+
+	<div>
+		<table class="table table-hover table-responsive">
+			<thead>
+			<tr>
+				<th>Name</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="facility : ${facilities}">
+				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myFacility" data-backdrop="static" data-keyboard="false"
+					   th:href="@{'/facility' + '/' + ${facility.id}}" th:text="${facility.getName()}"></a></td>
+				<td><a style="display:block;color:black;text-decoration: none" data-toggle="modal" data-target="#myFacility" data-backdrop="static" data-keyboard="false"
+					   th:href="@{'/facility' + '/activities/' + ${facility.id}}">Show related Activities</a></td>
+			</tr>
+			</tbody>
+		</table>
+
+		<a th:href="@{/addFacility}">Insert new facility</a>
+
+
+		<!-- Modal fake DON'T DELETE-->
+		<div id="myFacility" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<footer style="position:fixed; bottom:0; right:50px;">
+		<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
+	</footer><!--/.row-->
+</div>	<!--/.main-->
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/chart-data.js"></script>
+<script src="js/easypiechart.js"></script>
+<script src="js/easypiechart-data.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/custom.js"></script>
+<script>
+    window.onload = function () {
+        var chart1 = document.getElementById("line-chart").getContext("2d");
+        window.myLine = new Chart(chart1).Line(lineChartData, {
+            responsive: true,
+            scaleLineColor: "rgba(0,0,0,.2)",
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleFontColor: "#c5c7cc"
+        });
+    };
+</script>
+
 </body>
 </html>

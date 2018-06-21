@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-<meta charset="ISO-8859-1">
-<title>Show Participation</title>
+	<title>PArticipations</title>
 </head>
 <body>
-<body>
-	<div>
-		<h4>Participations</h4>
-		<div>
+<div>
+	<div class="modal-title">
+		<a class="close" th:href="@{/participations}" >&times;</a>
+		<h4 class="modal-title" style="text-align: center">Participations</h4>
+	</div>
+	<div class="modal-body">
+		<div class="table-responsive table table-striped">
 			<table>
 				<tr th:each="participation : ${participations}">
 					<td><span th:text="${participation.value.getAllievo().getName() + ' ' + participation.value.getAllievo().getSurname()}"></span></a></td>
@@ -16,5 +18,9 @@
 			</table>
 		</div>
 	</div>
+	<div style="text-align: center">
+		<a class="btn btn-default" th:href="@{/participations}">OK</a>
+	</div>
+</div>
 </body>
 </html>

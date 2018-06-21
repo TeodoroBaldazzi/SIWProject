@@ -40,15 +40,10 @@
         <div class="clear"></div>
     </div>
     <div class="divider"></div>
-    <form role="search">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-        </div>
-    </form>
     <ul class="nav menu">
         <li class="active"><a th:href="@{#}"><em class="fa fa-home">&nbsp;</em> HomePage</a></li>
         <li><a th:href="@{/dashboard}"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
-        <li class="parent "><a href="#sub-item-2">
+        <li th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" class="parent "><a href="#sub-item-2">
             <em class="fa fa-list">&nbsp;</em> Activities
         </a>
             <ul class="children" id="sub-item-2">
@@ -60,7 +55,7 @@
                 </a></li>
             </ul>
         </li>
-        <li class="parent "><a href="#sub-item-1">
+        <li th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" class="parent "><a href="#sub-item-1">
             <em class="fa fa-users">&nbsp;</em> Students
         </a>
             <ul class="children" id="sub-item-1">
@@ -72,7 +67,7 @@
             </ul>
         </li>
         <li th:if="${#ctx.#httpSession.getAttribute('isAdmin')}" class="parent "><a href="#sub-item-3">
-            <em class="fa fa-users">&nbsp;</em> Facilities
+            <em class="fa fa-university">&nbsp;</em> Facilities
         </a>
             <ul class="children" id="sub-item-3">
                 <li><a th:href="@{/addFacility}">
@@ -94,7 +89,7 @@
         </div>
     </div><!--/.row-->
 
-    <a th:href="@{/addStudent}">
+    <a th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" th:href="@{/addStudent}">
         <div class="panel panel-container">
             <div class="row">
                 <div class="no-padding">
@@ -106,7 +101,7 @@
             </div>
         </div>
     </a>
-    <a th:href="@{/chooseStudent}">
+    <a th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" th:href="@{/chooseStudent}">
         <div class="panel panel-container">
             <div class="row">
                 <div class="no-padding">
@@ -118,7 +113,7 @@
             </div>
         </div>
     </a>
-    <a th:href="@{addActivity}">
+    <a th:if="${#ctx.#httpSession.getAttribute('isAdmin')==false}" th:href="@{addActivity}">
         <div class="panel panel-container">
             <div class="row">
                 <div class="no-padding">
@@ -131,36 +126,36 @@
             </div>
         </div>
     </a>
-    <a th:href="@{/addFacility}">
+    <a th:if="${#ctx.#httpSession.getAttribute('isAdmin')}" th:href="@{/addFacility}">
         <div class="panel panel-container">
             <div class="row">
                 <div class="no-padding">
                     <div class="panel panel-teal panel-widget border-right">
-                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-clipboard color-blue"></em></div>
+                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-university color-blue"></em></div>
                         <div class="text-muted" style="color:#0f0f0f;margin-left:2em;display:inline-block;vertical-align:middle">Insert new Facility</div>
                     </div>
                 </div>
             </div>
         </div>
     </a>
-    <a th:href="@{/activities}">
+    <a th:if="${#ctx.#httpSession.getAttribute('isAdmin')}" th:href="@{/dashboard}">
         <div class="panel panel-container">
             <div class="row">
                 <div class="no-padding">
                     <div class="panel panel-teal panel-widget border-right">
-                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-clipboard color-blue"></em></div>
+                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-line-chart color-blue"></em></div>
                         <div class="text-muted" style="color:#0f0f0f;margin-left:2em;display:inline-block;vertical-align:middle">View Statistics</div>
                     </div>
                 </div>
             </div>
         </div>
     </a>
-    <a th:href="@{/facilities}">
+    <a th:if="${#ctx.#httpSession.getAttribute('isAdmin')}" th:href="@{/facilities}">
         <div class="panel panel-container">
             <div class="row">
                 <div class="no-padding">
                     <div class="panel panel-teal panel-widget border-right">
-                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-clipboard color-blue"></em></div>
+                        <div class="no-padding" style="display:inline-block;"><em class="fa fa-xl fa-wrench color-blue"></em></div>
                         <div class="text-muted" style="color:#0f0f0f;margin-left:2em;display:inline-block;vertical-align:middle">Facility Management</div>
                     </div>
                 </div>

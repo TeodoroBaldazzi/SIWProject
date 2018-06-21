@@ -26,7 +26,7 @@ public class Facility {
 	@Column(nullable=false)
 	private Integer maxCapacity;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="facility_id")
 	private List<Activity> attivitaSvolte;
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import it.uniroma3.model.Facility;
+import it.uniroma3.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -41,6 +42,9 @@ public class StudentController {
 	private ActivityService activityService;
 
 	@Autowired
+	private FacilityService facilityService;
+
+	@Autowired
 	private StudentValidator validator;
 
     @RequestMapping("/home")
@@ -51,7 +55,12 @@ public class StudentController {
 
     @RequestMapping("/dashboard")
     public String dashboard(Model model) {
-        return "dashboard";
+
+		model.addAttribute("studentiTot", studentService.findAll().size());
+		model.addAttribute("centriTot", facilityService.findAll().size());
+		model.addAttribute("attivitaTot", activityService.findAll().size());
+
+		return "dashboard";
     }
 
     @InitBinder("student")
