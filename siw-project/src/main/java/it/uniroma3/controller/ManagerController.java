@@ -38,36 +38,41 @@ public class ManagerController {
 
 	@RequestMapping(value = "/manager", method = RequestMethod.POST)
 	public String newManager(@Valid @ModelAttribute("userManager") User userManager,
-			Model model, BindingResult bindingResult, HttpSession session) {		
-		this.validator.validate(userManager, bindingResult);
+							 Model model, BindingResult bindingResult, HttpSession session) {
 
+
+		//this.validator.validate(userManager, bindingResult);
 		FacilityManager manager = new FacilityManager();
 		manager.setName(userManager.getName());
 		manager.setSurname(userManager.getLastName());
 		manager.setUsername(userManager.getUsername());
 
+
 		if (this.managerService.alreadyExists(manager)) {
+			bindingResult
+					.rejectValue("username", "error.userManager",
+							"There is already a user registered with the username provided");
+		}
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("exists", "Manager already in charge of a facility");
 			Facility esistente = this.managerService.findById(manager.getId()).getCentroDiAppartenenza();
 			model.addAttribute("esistente", esistente);
 			return "managerForm";
 		}
-		else
-			if (!bindingResult.hasErrors()) {
-				Facility facility = (Facility) session.getAttribute("facility");
-				facility.setResponsabile(manager);
-				manager.setCentroDiAppartenenza(facility);
-				
-				this.facilityService.save(facility);
-				this.managerService.save(manager);
+		else {
+			Facility facility = (Facility) session.getAttribute("facility");
+			facility.setResponsabile(manager);
+			manager.setCentroDiAppartenenza(facility);
 
-				this.userService.saveManagerUser(userManager);
+			this.facilityService.save(facility);
+			this.managerService.save(manager);
 
-				model.addAttribute("facilities", this.facilityService.findAll());
-				return "facilitiesList";
-			}
+			this.userService.saveManagerUser(userManager);
 
-		return "managerForm";
+			model.addAttribute("facilities", this.facilityService.findAll());
+			return "facilitiesList";
+		}
+
 	}
 
 }

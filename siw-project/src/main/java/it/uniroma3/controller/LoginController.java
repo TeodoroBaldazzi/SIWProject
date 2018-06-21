@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @SessionAttributes({"user"})
@@ -61,45 +63,56 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String createNewUser(@ModelAttribute("user") User user, Model model) {
-        this.userService.saveAdminUser(user);
-        model.addAttribute("successMessage", "User has been registered successfully");
+    public String createNewUser(@Valid @ModelAttribute(value="user") User user, Model model, BindingResult bindingResult) {
 
-        boolean noUsers;
-        if (userService.findAll().isEmpty())
-            noUsers=true;
-        else
-            noUsers=false;
+       /* User userExists = userService.findUserByUsername(user.getUsername());
+        if (userExists != null) {
+            bindingResult
+                    .rejectValue("username", "error.user",
+                            "There is already a user registered with the username provided");
+        }*/
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+        else {
+            this.userService.saveAdminUser(user);
+            model.addAttribute("successMessage", "User has been registered successfully");
 
-        model.addAttribute("noUsers", noUsers);
+            boolean noUsers;
+            if (userService.findAll().isEmpty())
+                noUsers = true;
+            else
+                noUsers = false;
 
+            model.addAttribute("noUsers", noUsers);
 
-        //modelAndView.addObject("user", user);
-        return "login";
+            //modelAndView.addObject("user", user);
+            return "login";
+        }
     }
 
         @RequestMapping(value="/home", method = RequestMethod.GET)
-    public ModelAndView home(Model model, HttpSession session){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(auth.getName());
+        public ModelAndView home(Model model, HttpSession session){
+            ModelAndView modelAndView = new ModelAndView();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.findUserByUsername(auth.getName());
 
 
-        boolean isAdmin=false;
-        for (Role r : user.getRoles()) {
-            if(r.getRole().equals("ADMIN"))
-                isAdmin=true;
+            boolean isAdmin=false;
+            for (Role r : user.getRoles()) {
+                if(r.getRole().equals("ADMIN"))
+                    isAdmin=true;
+            }
+
+            session.setAttribute("isAdmin", isAdmin);
+
+            if(!isAdmin)
+                session.setAttribute("currentFacility", this.managerService.findByUsername(user.getUsername()));
+            session.setAttribute("userName",   user.getName() + " " + user.getLastName());
+
+            modelAndView.setViewName("index");
+            return modelAndView;
         }
 
-        session.setAttribute("isAdmin", isAdmin);
 
-        if(!isAdmin)
-            session.setAttribute("currentFacility", this.managerService.findByUsername(user.getUsername()));
-        session.setAttribute("userName",   user.getName() + " " + user.getLastName());
-
-        modelAndView.setViewName("index");
-        return modelAndView;
     }
-
-
-}

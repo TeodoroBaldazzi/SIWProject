@@ -17,7 +17,7 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     @NotEmpty(message = "*Please provide a username")
     private String username;
 
