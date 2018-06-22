@@ -1,5 +1,14 @@
 # SIWProject
 
+Istruzioni per funzionamento:
+
+- prima registrazione sarà come Direttore dell'Azienda(admin)
+- Direttore potrà aggiungere nuova Facility, registrando al contempo nuovo Responsabile(facilityManager)
+- effettuare logout
+- effettuare login come facilityManager appena aggiunto per usufruire delle funzioni a lui associate (vedasi casi d'uso di riferimento)
+
+
+=============================================================================================
 Casi d’uso
 
 Caso UC1: Iscrizione nuovo Allievo 
